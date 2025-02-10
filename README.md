@@ -6,4 +6,4 @@
 
 ## Authors
 
-[AUTHORS]("AUTHORS.md")
+[AUTHORS](AUTHORS.md)
