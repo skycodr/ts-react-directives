@@ -1,5 +1,5 @@
-import { Children, isValidElement } from "react";
-import { LogicErrors } from "../fixtures";
+import { Children, isValidElement } from 'react';
+import { LogicErrors } from '@fixtures';
 
 /**
  * Validate if the children of the If directive are valid.
@@ -16,11 +16,11 @@ const validateSwitchBlocks: ValidatorFn = (children) => {
   }
 
   _children.forEach((child) => {
-    // @ts-expect-error
-    const typeName = isValidElement(child) ? child.type.name : "unknown";
+    // @ts-expect-error type.name exists on the child
+    const typeName = isValidElement(child) ? child.type.name : 'unknown';
 
     // If can't have a direct child of If, ElseIf, Else
-    if (typeName === "If" || typeName === "ElseIf" || typeName === "Else") {
+    if (typeName === 'If' || typeName === 'ElseIf' || typeName === 'Else') {
       errors.push(LogicErrors.SwitchBlockExpected);
     }
   });
@@ -39,8 +39,8 @@ const validateSwitch: ValidatorFn = (children) => {
   }
 
   _children.forEach((child, index) => {
-    // @ts-expect-error
-    const typeName = isValidElement(child) ? child.type.name : "unknown";
+    // @ts-expect-error type.name exists on the child
+    const typeName = isValidElement(child) ? child.type.name : 'unknown';
 
     const count = elements[typeName] ?? 0;
     elements[typeName] = count + 1;
@@ -51,7 +51,7 @@ const validateSwitch: ValidatorFn = (children) => {
     validateInvalidElement(typeName, errors);
   });
 
-  if (!elements["If"]) {
+  if (!elements['If']) {
     errors.push(LogicErrors.IfBlockExpected);
   }
 
@@ -59,12 +59,12 @@ const validateSwitch: ValidatorFn = (children) => {
 };
 
 const validateIfBlock = (typeName: string, index: number, elements: Record<string, number>, errors: LogicErrors[]) => {
-  if (typeName === "If") {
+  if (typeName === 'If') {
     if (index !== 0) {
       errors.push(LogicErrors.InvalidIfBlockOrdinal);
     }
 
-    if (elements["If"] > 1) {
+    if (elements['If'] > 1) {
       errors.push(LogicErrors.OnlyOneIfBlockExpected);
     }
   }
@@ -75,10 +75,10 @@ const validateElseBlock = (
   index: number,
   length: number,
   elements: Record<string, number>,
-  errors: LogicErrors[]
+  errors: LogicErrors[],
 ) => {
-  if (typeName === "Else") {
-    if (elements["Else"] > 1) {
+  if (typeName === 'Else') {
+    if (elements['Else'] > 1) {
       errors.push(LogicErrors.OnlyOneElseBlockExpected);
     }
     if (index === 0 || index !== length - 1) {
@@ -88,13 +88,13 @@ const validateElseBlock = (
 };
 
 const validateElseIfBlock = (typeName: string, index: number, errors: LogicErrors[]) => {
-  if (typeName === "ElseIf" && index === 0) {
+  if (typeName === 'ElseIf' && index === 0) {
     errors.push(LogicErrors.InvalidElseIfBlockOrdinal);
   }
 };
 
 const validateInvalidElement = (typeName: string, errors: LogicErrors[]) => {
-  if (typeName !== "If" && typeName !== "ElseIf" && typeName !== "Else") {
+  if (typeName !== 'If' && typeName !== 'ElseIf' && typeName !== 'Else') {
     errors.push(LogicErrors.InvalidElement);
   }
 };
@@ -102,11 +102,11 @@ const validateInvalidElement = (typeName: string, errors: LogicErrors[]) => {
 export class ValidationFactory {
   static get(validator: string) {
     switch (validator) {
-      case "Switch":
+      case 'Switch':
         return validateSwitch;
-      case "If":
-      case "ElseIf":
-      case "Else":
+      case 'If':
+      case 'ElseIf':
+      case 'Else':
         return validateSwitchBlocks;
       default:
         return () => [];

@@ -1,6 +1,6 @@
-import { Children, createElement, FC, memo, ReactNode } from "react";
-import { useValidate } from "../hooks";
-import { Errors } from "../../components";
+import { Children, createElement, FC, memo, ReactNode } from 'react';
+import { useValidate } from '@hooks';
+import { Errors } from '@components';
 
 const useSwitch = (props: SwitchProps) => {
   const errors = useValidate<SwitchProps>(props, Switch.name);
@@ -11,12 +11,12 @@ const useSwitch = (props: SwitchProps) => {
   const { children: oChildren } = props;
   const _children = Children.toArray(oChildren);
   const _child = _children.reduce<ReactNode | null>((acc, curr) => {
-    // @ts-expect-error
+    // @ts-expect-error props exist
     if (acc?.props?.condition) {
       return acc;
     }
-    // @ts-expect-error
-    if (curr?.props?.condition || curr?.type.name === "Else") {
+    // @ts-expect-error props exist
+    if (curr?.props?.condition || curr?.type.name === 'Else') {
       return curr;
     }
 

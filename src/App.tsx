@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Switch, If, Else, ElseIf } from "./directives";
+import { useState } from 'react';
+import { Switch, If, Else, ElseIf } from '@directives';
 
 function App() {
   const [val, setVal] = useState(-1);

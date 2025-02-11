@@ -1,1 +1,1 @@
-export { ValidationFactory } from "./validators";
+export { ValidationFactory } from './validators';
