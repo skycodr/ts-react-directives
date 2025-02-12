@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Switch, If, Else, ElseIf } from '@directives';
+import { SwitchIf, If, Else, ElseIf } from '@directives';
 
 function App() {
   const [val, setVal] = useState(-1);
@@ -13,18 +13,18 @@ function App() {
       <button onClick={() => setVal(1)}>1</button>
       <button onClick={() => setVal(2)}>2</button>
       <button onClick={() => setVal(3)}>3</button>
-      <Switch>
+      <SwitchIf>
         <If condition={val === 0}>
           <div>if val = 0</div>
         </If>
         <ElseIf condition={val === 1}>
           <div>if val = 1</div>
           <button onClick={() => setVal2((prev) => !prev)}>sub</button>
-          <Switch>
+          <SwitchIf>
             <If condition={val2}>
               <div>if sub</div>
             </If>
-          </Switch>
+          </SwitchIf>
         </ElseIf>
         <ElseIf condition={val === 2}>
           <div>if val = 2</div>
@@ -32,7 +32,7 @@ function App() {
         <Else>
           <div>Else val = {val}</div>
         </Else>
-      </Switch>
+      </SwitchIf>
     </div>
   );
 }
