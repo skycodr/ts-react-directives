@@ -15,7 +15,7 @@ export default defineConfig((_configEnv) =>
         coverage: {
           reportsDirectory: './reports/coverage',
           include: ['src/**/*.{ts,tsx}'],
-          exclude: ['src/__tests__/**', 'src/types'],
+          exclude: ['src/__tests__/**', 'src/types', '*.d.ts'],
         },
       },
     }),

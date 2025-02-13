@@ -1,9 +1,10 @@
-import { Children, createElement, FC, memo, ReactNode } from 'react';
-import { useValidate } from '@hooks';
 import { Errors } from '@components';
+import { useValidate } from '@hooks';
+import { Children, createElement, FC, ReactNode } from 'react';
 
 const useSwitchIf = (props: SwitchProps) => {
   const errors = useValidate<SwitchProps>(props, SwitchIf.name);
+
   if (errors.length) {
     return { children: createElement(Errors, { errors }) };
   }
@@ -32,4 +33,4 @@ const SwitchIf: FC<SwitchProps> = (props) => {
   return <>{children}</>;
 };
 
-export default memo(SwitchIf);
+export default SwitchIf;

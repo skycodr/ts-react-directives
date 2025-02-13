@@ -15,22 +15,25 @@ function App() {
       <button onClick={() => setVal(3)}>3</button>
       <SwitchIf>
         <If condition={val === 0}>
-          <div>if val = 0</div>
+          <div>If value = 0</div>
         </If>
         <ElseIf condition={val === 1}>
-          <div>if val = 1</div>
-          <button onClick={() => setVal2((prev) => !prev)}>sub</button>
+          <div>ElseIf value = 1</div>
+          <button onClick={() => setVal2((prev) => !prev)}>Nested If</button>
           <SwitchIf>
             <If condition={val2}>
-              <div>if sub</div>
+              <div>Sub If value = true</div>
             </If>
+            <Else>
+              <div>Sub Else value = false</div>
+            </Else>
           </SwitchIf>
         </ElseIf>
         <ElseIf condition={val === 2}>
-          <div>if val = 2</div>
+          <div>ElseIf value = 2</div>
         </ElseIf>
         <Else>
-          <div>Else val = {val}</div>
+          <div>Else (fall through {val} )</div>
         </Else>
       </SwitchIf>
     </div>
