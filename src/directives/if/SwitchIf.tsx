@@ -2,8 +2,8 @@ import { Errors } from '@components';
 import { useValidate } from '@hooks';
 import { Children, createElement, FC, ReactNode } from 'react';
 
-const useSwitchIf = (props: SwitchProps) => {
-  const errors = useValidate<SwitchProps>(props, SwitchIf.name);
+const useSwitchIf = (props: SwitchIfProps) => {
+  const errors = useValidate<SwitchIfProps>(props, SwitchIf.name);
 
   if (errors.length) {
     return { children: createElement(Errors, { errors }) };
@@ -27,7 +27,7 @@ const useSwitchIf = (props: SwitchProps) => {
   return { children: _child };
 };
 
-const SwitchIf: FC<SwitchProps> = (props) => {
+const SwitchIf: FC<SwitchIfProps> = (props) => {
   const { children } = useSwitchIf(props);
 
   return <>{children}</>;

@@ -1,2 +1,2 @@
 /// <reference types="vite/client" />
-/// <reference path="types/globals.d.ts" />
+/// <reference path="types/index.d.ts" />
