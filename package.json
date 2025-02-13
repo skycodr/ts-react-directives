@@ -29,7 +29,9 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepublish": "pnpm run build",
+    "publish": "pnpm publish --access public"
   },
   "dependencies": {
     "react": "^19.0.0",
