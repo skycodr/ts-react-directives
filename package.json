@@ -1,6 +1,6 @@
 {
   "name": "@openbytes/ts-react-directives",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "module",
   "author": {
     "name": "SkyCodr (aka: Dulan Sudasinghe)",
@@ -11,26 +11,26 @@
   ],
   "main": "dist/ts-react-directives.umd.js",
   "module": "dist/ts-react-directives.es.js",
+  "types": "./dist/ts-react-directives.d.ts",
   "exports": {
     ".": {
       "import": "./dist/ts-react-directives.es.js",
       "require": "./dist/ts-react-directives.umd.js"
     }
   },
-  "types": "dist/ts-react-directives.d.js",
   "scripts": {
     "dev": "vite",
+    "preview": "vite preview",
     "build": "tsc -b && vite build",
     "lint": "eslint src/**/*.{ts,tsx}",
     "lint:fix": "eslint --fix src/**/*.{ts,tsx}",
     "format:fix": "prettier --write src/**/*.{ts,tsx}",
     "format:check": "prettier --check src/**/*.{ts,tsx}",
-    "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "prepare": "husky",
-    "prepublish": "pnpm run build",
+    "prepublishOnly": "pnpm run build",
     "publish:registry": "pnpm publish --access public"
   },
   "dependencies": {

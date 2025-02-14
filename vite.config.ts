@@ -8,7 +8,16 @@ const libraryName = 'ts-react-directives';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tsConfigPaths(), dts({ insertTypesEntry: true })],
+  plugins: [
+    react(),
+    tsConfigPaths(),
+    dts({
+      insertTypesEntry: true,
+      include: ['./src/**/*.{ts, tsx}', './src/**/*.d.ts'],
+      exclude: ['**/*.stories.tsx', '**/*.test.{ts, tsx}'],
+      tsconfigPath: './tsconfig.app.json',
+    }),
+  ],
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
