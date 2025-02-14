@@ -1,5 +1,6 @@
 import { Errors } from '@components';
 import { useValidate } from '@hooks';
+import { SwitchIfProps } from '@types';
 import { Children, createElement, FC, ReactNode } from 'react';
 
 const useSwitchIf = (props: SwitchIfProps) => {

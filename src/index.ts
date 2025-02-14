@@ -1,5 +1,10 @@
-export * from '@components';
+import { ElseIfProps, ElseProps, IfProps, SwitchIfProps } from '@types';
+import { FC } from 'react';
+
 export * from '@directives';
-export * from '@fixtures';
-export * from '@hooks';
-export * from '@utils';
+
+// Generate the necessary typings
+export declare const SwitchIf: FC<SwitchIfProps>;
+export declare const If: FC<IfProps>;
+export declare const ElseIf: FC<ElseIfProps>;
+export declare const Else: FC<ElseProps>;

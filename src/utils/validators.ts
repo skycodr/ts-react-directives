@@ -1,6 +1,9 @@
 import { Else, ElseIf, If, SwitchIf } from '@directives';
 import { LogicErrors } from '@fixtures';
-import { isValidElement } from 'react';
+
+import { isValidElement, ReactNode } from 'react';
+
+type ValidatorFn = (children: Array<Exclude<ReactNode, boolean | null | undefined>>) => number[];
 
 const validateSwitchIfChildren: ValidatorFn = (children) => {
   const errors: LogicErrors[] = [];

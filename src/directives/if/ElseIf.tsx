@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useValidate } from '@hooks';
 import { Errors } from '@components';
+import { ElseIfProps } from '@types';
 
 const ElseIf: FC<ElseIfProps> = (props) => {
   const errors = useValidate<ElseIfProps>(props, ElseIf.name);

@@ -1,5 +1,5 @@
 import { Children, PropsWithChildren, ReactNode } from 'react';
-import { ValidationFactory } from '../utils';
+import { ValidationFactory } from '@utils';
 
 export const useValidate = <T extends ReactNode>(props: PropsWithChildren<T>, name: string) => {
   const { children } = props;

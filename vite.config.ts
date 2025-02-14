@@ -13,9 +13,10 @@ export default defineConfig({
     tsConfigPaths(),
     dts({
       insertTypesEntry: true,
-      include: ['./src/**/*.{ts, tsx}', './src/**/*.d.ts'],
-      exclude: ['**/*.stories.tsx', '**/*.test.{ts, tsx}'],
+      // pointing to the tsconfig.json doesn't work as it doesn't have the paths and
+      // will not load the configurations correctly.
       tsconfigPath: './tsconfig.app.json',
+      rollupTypes: true,
     }),
   ],
   build: {
