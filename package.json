@@ -1,6 +1,6 @@
 {
   "name": "@openbytes/ts-react-directives",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "type": "module",
   "author": {
     "name": "SkyCodr (aka: Dulan Sudasinghe)",
@@ -11,7 +11,7 @@
   ],
   "main": "dist/ts-react-directives.umd.js",
   "module": "dist/ts-react-directives.es.js",
-  "types": "./dist/ts-react-directives.d.ts",
+  "types": "dist/ts-react-directives.d.ts",
   "exports": {
     ".": {
       "import": "./dist/ts-react-directives.es.js",

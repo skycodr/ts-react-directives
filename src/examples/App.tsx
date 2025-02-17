@@ -13,13 +13,13 @@ function App() {
       <button onClick={() => setVal(1)}>1</button>
       <button onClick={() => setVal(2)}>2</button>
       <button onClick={() => setVal(3)}>3</button>
+      <button onClick={() => setVal2((prev) => !prev)}>Nested If</button>
       <SwitchIf>
         <If condition={val === 0}>
           <div>If value = 0</div>
         </If>
         <ElseIf condition={val === 1}>
           <div>ElseIf value = 1</div>
-          <button onClick={() => setVal2((prev) => !prev)}>Nested If</button>
           <SwitchIf>
             <If condition={val2}>
               <div>Sub If value = true</div>

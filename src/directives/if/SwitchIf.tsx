@@ -1,7 +1,7 @@
 import { Errors } from '@components';
 import { useValidate } from '@hooks';
 import { SwitchIfProps } from '@types';
-import { Children, createElement, FC, ReactNode } from 'react';
+import { Children, createElement, FC, ReactElement, ReactNode } from 'react';
 
 const useSwitchIf = (props: SwitchIfProps) => {
   const errors = useValidate<SwitchIfProps>(props, SwitchIf.name);
@@ -11,18 +11,28 @@ const useSwitchIf = (props: SwitchIfProps) => {
   }
 
   const { children: oChildren } = props;
-  const _children = Children.toArray(oChildren);
-  const _child = _children.reduce<ReactNode | null>((acc, curr) => {
-    // @ts-expect-error props exist
-    if (acc?.props?.condition) {
-      return acc;
-    }
-    // @ts-expect-error props exist
-    if (curr?.props?.condition || curr?.type.name === 'Else') {
-      return curr;
+  const elements = Children.toArray(oChildren);
+  const _child = elements.reduce<ReactNode | null>((result, element) => {
+    if (result) {
+      return result;
     }
 
-    return acc;
+    const { type } = (element ?? {}) as ReactElement;
+
+    if (type) {
+      const { name } = type as { name: string };
+      const { condition } = ((element as ReactElement)?.props ?? {}) as { condition: boolean | undefined };
+
+      if ((name === 'If' || name === 'ElseIf') && condition === true) {
+        return element;
+      }
+
+      if (name === 'Else') {
+        return element;
+      }
+    }
+
+    return null;
   }, null);
 
   return { children: _child };

@@ -15,7 +15,7 @@ export default defineConfig({
       insertTypesEntry: true,
       // pointing to the tsconfig.json doesn't work as it doesn't have the paths and
       // will not load the configurations correctly.
-      tsconfigPath: './tsconfig.app.json',
+      tsconfigPath: './tsconfig.json',
       rollupTypes: true,
     }),
   ],
@@ -23,9 +23,10 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: libraryName,
-      formats: ['es', 'cjs', 'umd'],
+      formats: ['es', 'umd'],
       fileName: (format) => `${libraryName}.${format}.js`,
     },
+
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
@@ -34,6 +35,7 @@ export default defineConfig({
           'react-dom': 'ReactDOM',
           'react/jsx-runtime': 'react/jsx-runtime',
         },
+        exports: 'named',
       },
     },
   },
