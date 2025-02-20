@@ -1,6 +1,6 @@
 {
   "name": "@openbytes/ts-react-directives",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "type": "module",
   "author": {
     "name": "SkyCodr (aka: Dulan Sudasinghe)",
@@ -63,6 +63,7 @@
     "typescript-eslint": "^8.24.0",
     "vite": "^6.1.0",
     "vite-plugin-dts": "^4.5.0",
+    "vite-plugin-lib-inject-css": "^2.2.1",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.5"
   },

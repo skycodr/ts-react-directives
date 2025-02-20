@@ -3,6 +3,7 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import tsConfigPaths from 'vite-tsconfig-paths';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
 const libraryName = 'ts-react-directives';
 
@@ -11,6 +12,7 @@ export default defineConfig({
   plugins: [
     react(),
     tsConfigPaths(),
+    libInjectCss(),
     dts({
       insertTypesEntry: true,
       // pointing to the tsconfig.json doesn't work as it doesn't have the paths and
