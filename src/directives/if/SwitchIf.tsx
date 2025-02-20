@@ -20,9 +20,11 @@ const useSwitchIf = (props: SwitchIfProps) => {
 
   if (elements.length) {
     let i = 0;
-    log('__FOUND_ELEMENTS__', elements.length);
+    log('__FOUND_ELEMENTS__', elements);
     do {
       const { type } = (elements[i] ?? {}) as ReactElement;
+
+      log('__INSIDE_LOOP__', i, type);
 
       if (type) {
         const { name } = type as { name: string };

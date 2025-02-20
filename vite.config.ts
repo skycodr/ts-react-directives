@@ -25,7 +25,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: libraryName,
-      formats: ['es', 'umd'],
+      formats: ['es'],
       fileName: (format) => `${libraryName}.${format}.js`,
     },
 
