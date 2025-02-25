@@ -6,7 +6,7 @@ import '@assets/index.css';
 type ErrorProps = { errors: LogicErrors[] };
 
 const Errors: FC<ErrorProps> = ({ errors }) => (
-  <ol className="error-list">
+  <ol className="trd-error-list">
     {errors.map((error, index) => (
       <li key={`${error}-${index}`}>{ERRORS[error]}</li>
     ))}

@@ -1,13 +1,16 @@
-import { FC } from 'react';
-import { useValidate } from '@hooks';
 import { Errors } from '@components';
-import { ElseProps } from '@types';
+import { useValidate } from '@hooks';
+import { FC, PropsWithChildren } from 'react';
 
-const Else: FC<ElseProps> = (props) => {
-  const errors = useValidate<ElseProps>(props, Else.name);
+export type ElseProps = {};
+
+const Else: FC<PropsWithChildren<ElseProps>> = (props) => {
+  const errors = useValidate(props, 'Else');
   const children = errors.length === 0 ? props.children : <Errors errors={errors} />;
 
   return <>{children}</>;
 };
+
+Else.displayName = 'Else';
 
 export default Else;

@@ -110,7 +110,7 @@ describe('SwitchIf', () => {
   it('should render an error if, only ElseIf block is provided', () => {
     const { getByText } = render(
       <SwitchIf>
-        <ElseIf>ElseIf Block</ElseIf>
+        <ElseIf condition={true}>ElseIf Block</ElseIf>
       </SwitchIf>,
     );
 

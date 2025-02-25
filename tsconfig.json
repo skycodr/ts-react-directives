@@ -15,8 +15,7 @@
       "@directives": ["src/directives"],
       "@fixtures": ["src/fixtures"],
       "@hooks": ["src/hooks"],
-      "@utils": ["src/utils"],
-      "@types": ["src/types"]
+      "@utils": ["src/utils"]
     },
 
     /* Bundler mode */

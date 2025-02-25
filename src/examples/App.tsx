@@ -22,16 +22,19 @@ function App() {
           <div>ElseIf value = 1</div>
           <SwitchIf>
             <If condition={val2}>
-              <div>Sub If value = true</div>
+              <div style={{ color: 'blue' }}>Sub If value = true</div>
             </If>
             <Else>
-              <div>Sub Else value = false</div>
+              <div style={{ color: 'red' }}>Sub Else value = false</div>
             </Else>
           </SwitchIf>
         </ElseIf>
         <ElseIf condition={val === 2}>
           <div>ElseIf value = 2</div>
         </ElseIf>
+        <Else>
+          <div>Else (fall through {val} )</div>
+        </Else>
         <Else>
           <div>Else (fall through {val} )</div>
         </Else>

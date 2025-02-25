@@ -1,1 +1,1 @@
-export { Else, ElseIf, If, SwitchIf } from '@directives';
+export { Else, ElseIf, If, SwitchIf, type IfProps, type ElseIfProps } from '@directives';
