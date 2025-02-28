@@ -29,6 +29,8 @@ const validateSwitchIfChildren: ValidatorFn = (children) => {
       displayName === DirectiveNames.ElseIf ||
       displayName === DirectiveNames.Else
     ) {
+      log('If, ElseIf, Else cannot be direct children of If, ElseIf, Else');
+      errors.push(LogicErrors.InvalidElement);
       errors.push(LogicErrors.SwitchBlockExpected);
     }
   });
@@ -71,7 +73,6 @@ const validateSwitchIf: ValidatorFn = (children) => {
 
   if (!elementLookup[If.name]) {
     log('5. if block expected - no if in lookup');
-
     errors.push(LogicErrors.IfBlockExpected);
   }
 
