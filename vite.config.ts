@@ -22,13 +22,13 @@ export default defineConfig({
     }),
   ],
   build: {
+    sourcemap: true,
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: libraryName,
       formats: ['es', 'cjs', 'umd'],
       fileName: (format) => `${libraryName}.${format}.js`,
     },
-
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {

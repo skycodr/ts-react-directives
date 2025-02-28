@@ -1,6 +1,6 @@
 {
   "name": "@openbytes/ts-react-directives",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "author": {
     "name": "SkyCodr (aka: Dulan Sudasinghe)",
@@ -10,13 +10,19 @@
   "files": [
     "dist"
   ],
+  "types": "./dist/ts-react-directives.d.ts",
   "main": "dist/ts-react-directives.cjs.js",
   "module": "dist/ts-react-directives.es.js",
-  "types": "dist/ts-react-directives.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/ts-react-directives.es.js",
-      "require": "./dist/ts-react-directives.cjs.js"
+      "import": {
+        "types": "./dist/ts-react-directives.d.ts",
+        "default": "./dist/ts-react-directives.es.js"
+      },
+      "require": {
+        "types": "./dist/ts-react-directives.d.ts",
+        "default": "./dist/ts-react-directives.cjs.js"
+      }
     }
   },
   "scripts": {

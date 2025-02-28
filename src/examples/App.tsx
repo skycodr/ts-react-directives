@@ -35,9 +35,6 @@ function App() {
         <Else>
           <div>Else (fall through {val} )</div>
         </Else>
-        <Else>
-          <div>Else (fall through {val} )</div>
-        </Else>
       </SwitchIf>
     </div>
   );
