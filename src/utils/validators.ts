@@ -1,4 +1,3 @@
-import { If } from '@directives';
 import { DirectiveNames, LogicErrors } from '@fixtures';
 import { log } from '@utils';
 
@@ -45,7 +44,7 @@ const validateSwitchIfChildren: ValidatorFn = (children) => {
  */
 const validateSwitchIf: ValidatorFn = (children) => {
   const errors: LogicErrors[] = [];
-  const elementLookup: Record<string, number> = {};
+  const lookupTable: Record<string, number> = {};
 
   log('1. validate switch if');
 
@@ -60,18 +59,18 @@ const validateSwitchIf: ValidatorFn = (children) => {
     const { displayName = DirectiveNames.Unknown } = child.type;
     log('3. validate switch if - display name', displayName);
 
-    const count = elementLookup[displayName] ?? 0;
-    elementLookup[displayName] = count + 1;
+    const count = lookupTable[displayName] ?? 0;
+    lookupTable[displayName] = count + 1;
 
-    log('4. element look up', elementLookup);
+    log('4. element look up', lookupTable);
 
-    validateIfBlock(displayName, index, elementLookup, errors);
-    validateElseBlock(displayName, index, children.length, elementLookup, errors);
+    validateIfBlock(displayName, index, lookupTable, errors);
+    validateElseBlock(displayName, index, children.length, lookupTable, errors);
     validateElseIfBlock(displayName, index, errors);
     validateSwitchIfInvalidElement(displayName, errors);
   });
 
-  if (!elementLookup[If.name]) {
+  if (!lookupTable[DirectiveNames.If]) {
     log('5. if block expected - no if in lookup');
     errors.push(LogicErrors.IfBlockExpected);
   }
