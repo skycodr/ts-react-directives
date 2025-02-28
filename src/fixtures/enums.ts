@@ -13,3 +13,11 @@ export enum LogicErrors {
   InvalidElement = 3002,
   ChildrenExpected = 3003,
 }
+
+export enum DirectiveNames {
+  If = 'If',
+  ElseIf = 'ElseIf',
+  Else = 'Else',
+  SwitchIf = 'SwitchIf',
+  Unknown = 'Unknown',
+}

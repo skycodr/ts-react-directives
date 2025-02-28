@@ -1,4 +1,5 @@
 import { Errors } from '@components';
+import { DirectiveNames } from '@fixtures';
 import { useValidate } from '@hooks';
 
 import {
@@ -57,6 +58,6 @@ const SwitchIf: FC<PropsWithChildren<SwitchIfProps>> = (props) => {
   return <>{children}</>;
 };
 
-SwitchIf.displayName = 'SwitchIf';
+SwitchIf.displayName = DirectiveNames.SwitchIf;
 
 export default SwitchIf;

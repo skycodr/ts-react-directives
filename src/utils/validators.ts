@@ -1,10 +1,16 @@
-import { Else, ElseIf, If, SwitchIf } from '@directives';
-import { LogicErrors } from '@fixtures';
+import { If } from '@directives';
+import { DirectiveNames, LogicErrors } from '@fixtures';
+import { log } from '@utils';
 
 import { ReactNode } from 'react';
 
 type ValidatorFn = (children: Array<Exclude<ReactNode, boolean | null | undefined>>) => number[];
 
+/**
+ * Validate the children of SwitchIf directive
+ * @param children
+ * @returns
+ */
 const validateSwitchIfChildren: ValidatorFn = (children) => {
   const errors: LogicErrors[] = [];
 
@@ -15,10 +21,14 @@ const validateSwitchIfChildren: ValidatorFn = (children) => {
 
   children.forEach((child) => {
     // @ts-expect-error child.type exist
-    const { displayName } = child.type ?? {};
+    const { displayName = DirectiveNames.Unknown } = child.type ?? {};
 
     // If, ElseIf, Else cannot be direct children of If, ElseIf, Else
-    if (displayName === If.displayName || displayName === ElseIf.displayName || displayName === Else.displayName) {
+    if (
+      displayName === DirectiveNames.If ||
+      displayName === DirectiveNames.ElseIf ||
+      displayName === DirectiveNames.Else
+    ) {
       errors.push(LogicErrors.SwitchBlockExpected);
     }
   });
@@ -26,21 +36,32 @@ const validateSwitchIfChildren: ValidatorFn = (children) => {
   return errors;
 };
 
+/**
+ * Validate the SwitchIf directive
+ * @param children
+ * @returns
+ */
 const validateSwitchIf: ValidatorFn = (children) => {
   const errors: LogicErrors[] = [];
   const elementLookup: Record<string, number> = {};
 
+  log('1. validate switch if');
+
   if (children.length === 0) {
+    log('2. children expected');
     errors.push(LogicErrors.ChildrenExpected, LogicErrors.IfBlockExpected);
     return errors;
   }
 
   children.forEach((child, index) => {
     // @ts-expect-error child.type exist
-    const { displayName = 'unknown' } = child.type;
+    const { displayName = DirectiveNames.Unknown } = child.type;
+    log('3. validate switch if - display name', displayName);
 
     const count = elementLookup[displayName] ?? 0;
     elementLookup[displayName] = count + 1;
+
+    log('4. element look up', elementLookup);
 
     validateIfBlock(displayName, index, elementLookup, errors);
     validateElseBlock(displayName, index, children.length, elementLookup, errors);
@@ -49,33 +70,41 @@ const validateSwitchIf: ValidatorFn = (children) => {
   });
 
   if (!elementLookup[If.name]) {
+    log('5. if block expected - no if in lookup');
+
     errors.push(LogicErrors.IfBlockExpected);
   }
 
   return errors;
 };
 
-const validateIfBlock = (typeName: string, index: number, elements: Record<string, number>, errors: LogicErrors[]) => {
-  if (typeName === If.name) {
+const validateIfBlock = (
+  elementName: string,
+  index: number,
+  elements: Record<string, number>,
+  errors: LogicErrors[],
+) => {
+  log('6. validate if block', elementName, index, elements);
+  if (elementName === DirectiveNames.If) {
     if (index !== 0) {
       errors.push(LogicErrors.InvalidIfBlockOrdinal);
     }
 
-    if (elements[If.name] > 1) {
+    if (elements[DirectiveNames.If] > 1) {
       errors.push(LogicErrors.OnlyOneIfBlockExpected);
     }
   }
 };
 
 const validateElseBlock = (
-  typeName: string,
+  elementName: string,
   index: number,
   length: number,
   elements: Record<string, number>,
   errors: LogicErrors[],
 ) => {
-  if (typeName === Else.name) {
-    if (elements[Else.name] > 1) {
+  if (elementName === DirectiveNames.Else) {
+    if (elements[DirectiveNames.Else] > 1) {
       errors.push(LogicErrors.OnlyOneElseBlockExpected);
     }
     if (index === 0 || index !== length - 1) {
@@ -84,32 +113,36 @@ const validateElseBlock = (
   }
 };
 
-const validateElseIfBlock = (typeName: string, index: number, errors: LogicErrors[]) => {
-  if (typeName === ElseIf.name && index === 0) {
+const validateElseIfBlock = (elementName: string, index: number, errors: LogicErrors[]) => {
+  if (elementName === DirectiveNames.ElseIf && index === 0) {
     errors.push(LogicErrors.InvalidElseIfBlockOrdinal);
   }
 };
 
-const validateSwitchIfInvalidElement = (typeName: string, errors: LogicErrors[]) => {
-  if (typeName !== If.name && typeName !== ElseIf.name && typeName !== Else.name) {
+const validateSwitchIfInvalidElement = (elementName: string, errors: LogicErrors[]) => {
+  if (
+    elementName !== DirectiveNames.If &&
+    elementName !== DirectiveNames.ElseIf &&
+    elementName !== DirectiveNames.Else
+  ) {
     errors.push(LogicErrors.InvalidElement);
   }
 };
 
 export class ValidationFactory {
   static get(validator: string) {
-    let validatorFn: ValidatorFn;
+    let validatorFn: ValidatorFn = () => [];
     switch (validator) {
-      case SwitchIf.displayName:
+      case DirectiveNames.SwitchIf:
+        log('getting validation fn for switch if');
         validatorFn = validateSwitchIf;
         break;
-      case If.displayName:
-      case ElseIf.displayName:
-      case Else.displayName:
+      case DirectiveNames.If:
+      case DirectiveNames.ElseIf:
+      case DirectiveNames.Else:
+        log('getting validation fn for switch if children');
         validatorFn = validateSwitchIfChildren;
         break;
-      default:
-        validatorFn = () => [];
     }
 
     return validatorFn;

@@ -1,4 +1,5 @@
 import { Errors } from '@components';
+import { DirectiveNames } from '@fixtures';
 import { useValidate } from '@hooks';
 import { FC, PropsWithChildren } from 'react';
 
@@ -11,6 +12,6 @@ const Else: FC<PropsWithChildren<ElseProps>> = (props) => {
   return <>{children}</>;
 };
 
-Else.displayName = 'Else';
+Else.displayName = DirectiveNames.Else;
 
 export default Else;
