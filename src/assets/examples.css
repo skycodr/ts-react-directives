@@ -1,0 +1,39 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.examples {
+  height: 100vh;
+  width: 100vw;
+}
+
+.examples > .container {
+  display: flex;
+  flex-direction: row;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+  background-color: white;
+}
+.examples > .container > div {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+  width: 50%;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.content {
+  font-size: 2rem;
+}
+
+h1 {
+  font-size: 2.15rem;
+  font-weight: bold;
+  padding: 1rem 0;
+}

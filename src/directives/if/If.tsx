@@ -1,5 +1,5 @@
 import { Errors } from '@components';
-import { DirectiveNames } from '@fixtures';
+import { Directives } from '@fixtures';
 import { useValidate } from '@hooks';
 
 import { FC, PropsWithChildren } from 'react';
@@ -16,6 +16,6 @@ const If: FC<IfProps> = (props) => {
   return <>{condition && children}</>;
 };
 
-If.displayName = DirectiveNames.If;
+If.displayName = Directives.If;
 
 export default If;

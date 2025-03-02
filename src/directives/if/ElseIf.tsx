@@ -1,5 +1,5 @@
 import { Errors } from '@components';
-import { DirectiveNames } from '@fixtures';
+import { Directives } from '@fixtures';
 import { useValidate } from '@hooks';
 import { FC, PropsWithChildren } from 'react';
 
@@ -15,6 +15,6 @@ const ElseIf: FC<ElseIfProps> = (props) => {
   return <>{condition && children}</>;
 };
 
-ElseIf.displayName = DirectiveNames.ElseIf;
+ElseIf.displayName = Directives.ElseIf;
 
 export default ElseIf;

@@ -1,9 +1,9 @@
 export enum LogicErrors {
-  // Switch
+  // Check
   IfBlockExpected = 2001,
   OnlyOneIfBlockExpected = 2002,
   OnlyOneElseBlockExpected = 2003,
-  SwitchBlockExpected = 2005,
+  CheckBlockExpected = 2005,
   InvalidIfBlockOrdinal = 2004,
   InvalidElseBlockOrdinal = 2006,
   InvalidElseIfBlockOrdinal = 2007,
@@ -14,10 +14,10 @@ export enum LogicErrors {
   ChildrenExpected = 3003,
 }
 
-export enum DirectiveNames {
+export enum Directives {
   If = 'If',
   ElseIf = 'ElseIf',
   Else = 'Else',
-  SwitchIf = 'SwitchIf',
+  Check = 'Check',
   Unknown = 'Unknown',
 }

@@ -1,5 +1,5 @@
 import { Errors } from '@components';
-import { DirectiveNames } from '@fixtures';
+import { Directives } from '@fixtures';
 import { useValidate } from '@hooks';
 
 import {
@@ -13,10 +13,10 @@ import {
   ReactElement,
 } from 'react';
 
-export type SwitchIfProps = {};
+export type CheckProps = {};
 
-const useSwitchIf = (props: PropsWithChildren) => {
-  const errors = useValidate(props, 'SwitchIf');
+const useCheck = (props: PropsWithChildren) => {
+  const errors = useValidate(props, Directives.Check);
 
   if (errors.length) {
     return { children: createElement(Errors, { errors }) };
@@ -53,11 +53,11 @@ const findChild = (elements: ReactElement[]) => {
   return null;
 };
 
-const SwitchIf: FC<PropsWithChildren<SwitchIfProps>> = (props) => {
-  const { children } = useSwitchIf(props);
+const Check: FC<PropsWithChildren<CheckProps>> = (props) => {
+  const { children } = useCheck(props);
   return <>{children}</>;
 };
 
-SwitchIf.displayName = DirectiveNames.SwitchIf;
+Check.displayName = Directives.Check;
 
-export default SwitchIf;
+export default Check;
