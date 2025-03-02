@@ -1,6 +1,7 @@
 {
   "name": "@openbytes/ts-react-directives",
-  "version": "1.0.0",
+  "description": "A collection of React directives to simplify conditional rendering and loops.",
+  "version": "1.0.1",
   "type": "module",
   "author": {
     "name": "SkyCodr (aka: Dulan Sudasinghe)",
@@ -11,6 +12,24 @@
     "dist",
     "README.md"
   ],
+  "keywords": [
+    "react",
+    "typescript",
+    "directives",
+    "conditionals",
+    "if",
+    "loops",
+    "rendering",
+    "conditional rendering"
+  ],
+  "homepage": "https://skycodr.github.io/ts-react-directives/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skycodr/ts-react-directives.git"
+  },
+  "bugs": {
+    "url": "https://github.com/skycodr/ts-react-directives/issues"
+  },
   "readme": "README.md",
   "types": "dist/ts-react-directives.d.ts",
   "main": "dist/ts-react-directives.cjs.js",
@@ -48,9 +67,7 @@
   },
   "dependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-syntax-highlighter": "^15.6.1",
-    "react-tabs": "^6.1.0"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.7.1",
@@ -76,6 +93,8 @@
     "jsdom": "^26.0.0",
     "lint-staged": "^15.4.3",
     "prettier": "^3.5.1",
+    "react-syntax-highlighter": "^15.6.1",
+    "react-tabs": "^6.1.0",
     "rimraf": "^6.0.1",
     "typescript": "~5.7.3",
     "typescript-eslint": "^8.24.0",
