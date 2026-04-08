@@ -13,11 +13,14 @@ export type TemplateProps<T extends DataShape> = Partial<MetaData<T>> & {
   children: RenderFunction<T>;
 };
 
-const Template = <T extends DataShape>({ index, data, children: fn }: TemplateProps<T>) => {
+const Template = <T extends DataShape>(props: TemplateProps<T>) => {
+  const { index, data, children: fn } = props;
+
   if (index === undefined || data === undefined) {
     return null;
   }
-  const element = fn({ index, data });
+
+  const element = fn?.({ index, data }) ?? null;
   return element;
 };
 

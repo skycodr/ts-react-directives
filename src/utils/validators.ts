@@ -144,6 +144,12 @@ const validateCheckInvalidElement = (elementName: string, errors: LogicErrors[])
   }
 };
 
+/**
+ * Validate the Loop directive and its children
+ * @param children
+ * @param data
+ * @returns
+ */
 const validateLoop: ValidatorFn<any> = (children, data?: LoopDataShape<any>) => {
   const errors: LogicErrors[] = [];
 

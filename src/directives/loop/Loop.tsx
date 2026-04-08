@@ -32,19 +32,16 @@ const useValidateProps = <T extends DataShape>(props: LoopProps<T>) => {
   const errors = [];
 
   if (over === undefined && from === undefined && to === undefined && step === undefined) {
-    console.log('1');
     errors.push(LogicErrors.MalformedLoop);
+  } else if (over?.length === 0) {
+    errors.push(LogicErrors.EmptyLoopSource);
   } else if (from === undefined && to === undefined && !over) {
-    console.log('2');
     errors.push(LogicErrors.MalformedLoop);
   } else if (from !== undefined && to !== undefined && step !== undefined) {
-    console.log('3');
     if (from < 0 || to < 0) {
-      console.log('4');
       errors.push(LogicErrors.MalformedLoop);
     }
     if ((from <= to && step <= 0) || (from >= to && step >= 0)) {
-      console.log('5');
       errors.push(LogicErrors.MalformedLoop, LogicErrors.InfiniteLoopCondition);
     }
   }

@@ -13,6 +13,7 @@ export enum LogicErrors {
   InfiniteLoopCondition = 2009,
   TemplateBlockExpected = 2012,
   OnlyOneTemplateBlockExpected = 2013,
+  EmptyLoopSource = 2014,
 
   // General
 

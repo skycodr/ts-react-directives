@@ -11,8 +11,9 @@ export const ERRORS: Record<LogicErrors, string> = {
   [LogicErrors.ChildrenExpected]: 'Should at least have one child',
   [LogicErrors.InvalidElement]: 'Invalid element',
   [LogicErrors.MalformedLoop]: 'Malformed loop',
+  [LogicErrors.EmptyLoopSource]: 'Empty loop source',
   [LogicErrors.InfiniteLoopCondition]: 'Infinite loop condition',
   [LogicErrors.TemplateBlockExpected]: "Missing 'Template'",
-  [LogicErrors.OnlyOneTemplateBlockExpected]: '',
+  [LogicErrors.OnlyOneTemplateBlockExpected]: 'Only one Template block expected',
   [LogicErrors.SingleChildExpected]: 'Can have only a single child',
 };
