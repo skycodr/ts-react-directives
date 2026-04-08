@@ -59,7 +59,7 @@ const Snippet = () => {
     <div className="container">
       <div>
         <h1>Example Code</h1>
-        <Code>{codeString}</Code>;
+        <Code>{codeString}</Code>
       </div>
       <div>
         <h1>Demo</h1>

@@ -1,1 +1,1 @@
-export { useValidate } from './useValidate';
+export { useValidationFactory as useValidate } from './useValidationFactory';

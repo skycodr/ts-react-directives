@@ -225,4 +225,35 @@ describe('tests for <Check>', () => {
 
     expect(getByText(ERRORS[LogicErrors.InvalidElement])).toBeInTheDocument();
   });
+
+  it('should render nothing if condition is false and there is no Else block', () => {
+    const { container } = render(
+      <Check>
+        <If condition={false}>If Block</If>
+      </Check>,
+    );
+    expect(container.firstChild).toBeNull();
+  });
+
+  it('should render nothing if all conditions are false and there is no Else block', () => {
+    const { container } = render(
+      <Check>
+        <If condition={false}>If Block</If>
+        <ElseIf condition={false}>ElseIf Block</ElseIf>
+      </Check>,
+    );
+    expect(container.firstChild).toBeNull();
+  });
+
+  it('should render an error if, Else block is before an ElseIf block', () => {
+    const { getByText } = render(
+      <Check>
+        <If condition={false}>If Block</If>
+        <Else>Else Block</Else>
+        <ElseIf condition={true}>ElseIf Block</ElseIf>
+      </Check>,
+    );
+
+    expect(getByText(ERRORS[LogicErrors.InvalidElseBlockOrdinal])).toBeInTheDocument();
+  });
 });

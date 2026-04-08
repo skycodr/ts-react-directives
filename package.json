@@ -52,7 +52,7 @@
     "preview": "vite preview --config vite.config.examples.ts",
     "build:lib": "tsc -b && vite build",
     "build:examples": "tsc -b && vite build --config vite.config.examples.ts",
-    "build": "&& pnpm build:lib && pnpm build:examples",
+    "build": "pnpm build:lib && pnpm build:examples",
     "lint": "eslint src/**/*.{ts,tsx}",
     "lint:fix": "eslint --fix src/**/*.{ts,tsx}",
     "format": "prettier --check src/**/*.{ts,tsx}",

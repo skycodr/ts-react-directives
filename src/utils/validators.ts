@@ -4,8 +4,12 @@
  */
 import { Directives, LogicErrors } from '@fixtures';
 import { ReactNode } from 'react';
+import { LoopDataShape } from 'src/directives/loop/Loop';
 
-type ValidatorFn = (children: Array<Exclude<ReactNode, boolean | null | undefined>>) => number[];
+type ValidatorFn<T extends {} = {}> = (
+  children: Array<Exclude<ReactNode, boolean | null | undefined>>,
+  props?: T,
+) => number[];
 
 /**
  * Validate the children of Check directive
@@ -50,7 +54,7 @@ const validateCheck: ValidatorFn = (children) => {
 
   children.forEach((child, index) => {
     // @ts-expect-error child.type exist
-    const { displayName = Directives.Unknown } = child.type;
+    const { displayName = Directives.Unknown } = child.type ?? {};
 
     const count = lookupTable[displayName] ?? 0;
     lookupTable[displayName] = count + 1;
@@ -140,6 +144,35 @@ const validateCheckInvalidElement = (elementName: string, errors: LogicErrors[])
   }
 };
 
+const validateLoop: ValidatorFn<any> = (children, data?: LoopDataShape<any>) => {
+  const errors: LogicErrors[] = [];
+
+  if (children.length === 0) {
+    errors.push(LogicErrors.ChildrenExpected, LogicErrors.TemplateBlockExpected);
+  } else if (children.length > 1) {
+    errors.push(LogicErrors.SingleChildExpected, LogicErrors.OnlyOneTemplateBlockExpected);
+  } else {
+    // @ts-expect-error child.type exist
+    const { displayName = Directives.Unknown } = children[0].type;
+
+    if (displayName !== Directives.Template) {
+      errors.push(LogicErrors.InvalidElement, LogicErrors.TemplateBlockExpected);
+    }
+
+    const { from = 0, to = 0, step = 0 } = data ?? {};
+
+    if (step === 0 || (step > 0 && from > to) || (step < 0 && from < to)) {
+      errors.push(LogicErrors.InfiniteLoopCondition);
+    }
+  }
+
+  if (errors.length) {
+    errors.push(LogicErrors.MalformedLoop);
+  }
+
+  return errors;
+};
+
 /**
  * Factory class to get the validator function based on the directive name
  */
@@ -154,6 +187,9 @@ export class ValidationFactory {
       case Directives.ElseIf:
       case Directives.Else:
         validatorFn = validateCheckChildren;
+        break;
+      case Directives.Loop:
+        validatorFn = validateLoop;
         break;
     }
 

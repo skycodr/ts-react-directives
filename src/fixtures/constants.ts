@@ -10,4 +10,9 @@ export const ERRORS: Record<LogicErrors, string> = {
   [LogicErrors.InvalidElseIfBlockOrdinal]: "Invalid ordinals, cannot have 'ElseIf' before 'If'",
   [LogicErrors.ChildrenExpected]: 'Should at least have one child',
   [LogicErrors.InvalidElement]: 'Invalid element',
+  [LogicErrors.MalformedLoop]: 'Malformed loop',
+  [LogicErrors.InfiniteLoopCondition]: 'Infinite loop condition',
+  [LogicErrors.TemplateBlockExpected]: "Missing 'Template'",
+  [LogicErrors.OnlyOneTemplateBlockExpected]: '',
+  [LogicErrors.SingleChildExpected]: 'Can have only a single child',
 };
