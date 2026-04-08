@@ -1,44 +1,65 @@
 import '@assets/examples.css';
 import { Code } from '@components';
-import { Loop, Template } from '@directives';
+import { Loop, Template, Check, If, Else, ElseIf } from '@directives';
 
 const Component = () => {
   return (
     <div className="container">
-      <ol>
-        <Loop to={10}>
-          <Template<number>>
-            {({ data: datum, index }) => (
-              <li>
-                {datum}-{index}
-              </li>
-            )}
-          </Template>
-        </Loop>
-      </ol>
+      <Loop from={1} to={31}>
+        <Template<string>>
+          {({ data: datum, index }) => (
+            <Check>
+              <If condition={index % 15 === 0}>
+                <i>FizzBuzz</i>
+                <br />
+              </If>
+              <ElseIf condition={index % 5 === 0}>
+                <i>Buzz</i>
+                <br />
+              </ElseIf>
+              <ElseIf condition={index % 3 === 0}>
+                <i>Fizz</i>
+                <br />
+              </ElseIf>
+              <Else>
+                {datum}
+                <br />
+              </Else>
+            </Check>
+          )}
+        </Template>
+      </Loop>
     </div>
   );
 };
 
 const codeString = `
-import { Loop, Template } from '@openbytes/ts-react-directives';
+import { Loop, Template, Check, If, Else } from '@openbytes/ts-react-directives';
 
 export const Snippet = () => {
-  const data = ['a', 'b', 'c', 'd', 'e', 'f'];
-
-   return (
+  return (
     <div className="container">
-      <ol>
-        <Loop to={10}>
-          <Template<number>>
-            {({ data: datum, index }) => (
-              <li>
-                {datum}-{index}
-              </li>
-            )}
-          </Template>
-        </Loop>
-      </ol>
+      <Loop over={[]}>
+        <Template<string>>
+          {({ data: datum, index }) => (
+            <Check>
+              <If condition={index % 15 === 0}>
+                <i>FizzBuzz</i>
+                <br />;
+              </If>
+              <ElseIf condition={index % 5 === 0}>
+                <i>Buzz</i>
+                <br />
+              </ElseIf>
+              <ElseIf condition={index % 3 === 0}>
+                <i>Fizz</i>
+                <br />
+              </ElseIf>
+              <Else>{datum},&nbsp;</Else>
+            </Check>
+          )}
+        </Template>
+      </Loop>
     </div>
   );
 };
