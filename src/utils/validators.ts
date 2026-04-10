@@ -2,9 +2,9 @@
  * @author SkyCodr (aka: Dulan Sudasinghe)
  * @description This file contains the logic to validate the directives.
  */
+import { LoopDataShape } from '@directives';
 import { Directives, LogicErrors } from '@fixtures';
 import { ReactNode } from 'react';
-import { LoopDataShape } from 'src/directives/loop/Loop';
 
 type ValidatorFn<T extends {} = {}> = (
   children: Array<Exclude<ReactNode, boolean | null | undefined>>,

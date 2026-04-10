@@ -1,5 +1,5 @@
-import { FC } from 'react';
 import { ERRORS, LogicErrors } from '@fixtures';
+import { FC } from 'react';
 
 import '@assets/index.css';
 

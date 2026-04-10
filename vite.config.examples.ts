@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig } from 'vite';
@@ -6,7 +7,7 @@ import tsConfigPaths from 'vite-tsconfig-paths';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tsConfigPaths(), libInjectCss()],
+  plugins: [react(), tsConfigPaths(), libInjectCss(), tailwindcss()],
   root: '.',
   build: {
     outDir: 'dist/examples',

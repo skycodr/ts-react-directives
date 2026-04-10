@@ -1,9 +1,10 @@
+import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
-import tsConfigPaths from 'vite-tsconfig-paths';
 import { libInjectCss } from 'vite-plugin-lib-inject-css';
+import tsConfigPaths from 'vite-tsconfig-paths';
 
 const libraryName = 'ts-react-directives';
 
@@ -20,6 +21,7 @@ export default defineConfig({
       tsconfigPath: './tsconfig.json',
       rollupTypes: true,
     }),
+    tailwindcss(),
   ],
   build: {
     emptyOutDir: true,
