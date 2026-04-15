@@ -1,6 +1,7 @@
 import { Errors } from '@components';
 import { Directives } from '@fixtures';
 import { useValidate } from '@hooks';
+import { ConfigManager } from '@utils';
 
 import {
   Children,
@@ -19,7 +20,11 @@ const useCheck = (props: PropsWithChildren) => {
   const errors = useValidate(props, Directives.Check);
 
   if (errors.length) {
-    return { children: createElement(Errors, { errors }) };
+    const config = ConfigManager.getInstance();
+
+    if (config.isShowErrors && config.isShowErrorsInPlace) return { children: createElement(Errors, { errors }) };
+
+    return { children: null };
   }
 
   const elements = Children.toArray(props.children);

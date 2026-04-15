@@ -8,7 +8,9 @@ type ErrorProps = { errors: LogicErrors[] };
 const Errors: FC<ErrorProps> = ({ errors }) => (
   <ol className="trd-error-list">
     {errors.map((error, index) => (
-      <li key={`${error}-${index}`}>{ERRORS[error]}</li>
+      <li className="trd-error-list__item" key={`${error}-${index}`}>
+        <i className="trd-error-list__item--text">{ERRORS[error]}</i>
+      </li>
     ))}
   </ol>
 );

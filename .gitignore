@@ -23,3 +23,5 @@ reports
 *.njsproj
 *.sln
 *.sw?
+.env
+.env.*

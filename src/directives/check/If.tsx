@@ -1,8 +1,9 @@
 import { Errors } from '@components';
 import { Directives } from '@fixtures';
 import { useValidate } from '@hooks';
+import { ConfigManager } from '@utils';
 
-import { FC, PropsWithChildren } from 'react';
+import { createElement, FC, PropsWithChildren } from 'react';
 
 export type IfProps = PropsWithChildren<{
   condition: boolean;
@@ -10,10 +11,15 @@ export type IfProps = PropsWithChildren<{
 
 const If: FC<IfProps> = (props) => {
   const errors = useValidate(props, 'If');
+  if (errors.length) {
+    const config = ConfigManager.getInstance();
+    let ch = null;
+    if (config.isShowErrors && config.isShowErrorsInPlace) ch = createElement(Errors, { errors });
+    return ch;
+  }
   const { condition } = props;
-  const children = errors.length === 0 ? props.children : <Errors errors={errors} />;
 
-  return <>{condition && children}</>;
+  return <>{condition && props.children}</>;
 };
 
 If.displayName = Directives.If;

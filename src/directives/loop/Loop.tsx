@@ -2,6 +2,7 @@ import { Errors } from '@components';
 import { Directives, LogicErrors } from '@fixtures';
 import { useValidate } from '@hooks';
 import { DataShape } from '@types';
+import { ConfigManager } from '@utils';
 import { cloneElement, createElement, PropsWithChildren } from 'react';
 
 export type LoopDataShape<T extends DataShape> = {
@@ -58,10 +59,11 @@ const useLoop = <T extends DataShape>(props: LoopProps<T>) => {
   const computeErrors = useValidate(computedProps, Directives.Loop);
   const errors = [...propErrors, ...computeErrors];
 
-  let ch;
+  let ch = null;
 
   if (errors.length) {
-    ch = createElement(Errors, { errors });
+    const config = ConfigManager.getInstance();
+    if (config.isShowErrors && config.isShowErrorsInPlace) ch = createElement(Errors, { errors });
   } else {
     ch = [];
     // calculate if 'i' should be greater than or equal to 'to' or less than or equal to 'to'
