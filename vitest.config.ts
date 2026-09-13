@@ -1,11 +1,13 @@
 import { defineConfig, mergeConfig } from 'vitest/config';
 import viteConfig from './vite.config';
+import { loadEnv } from 'vite';
 
-export default defineConfig((_configEnv) =>
+export default defineConfig(({ mode }) =>
   mergeConfig(
     viteConfig,
     defineConfig({
       test: {
+        env: loadEnv(mode, process.cwd(), ''),
         globals: true,
         environment: 'jsdom',
         setupFiles: ['./setupTest.ts'],
