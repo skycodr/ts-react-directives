@@ -1,6 +1,6 @@
-import { Else, ElseIf, If, Check } from '@directives';
-import { render } from '@testing-library/react';
+import { Check, Else, ElseIf, If } from '@directives';
 import { ERRORS, LogicErrors } from '@fixtures';
+import { render } from '@testing-library/react';
 
 describe('tests for <Check>', () => {
   it('should render content of If block', () => {
