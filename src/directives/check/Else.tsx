@@ -1,24 +1,10 @@
-import { Errors } from '@components';
 import { Directives } from '@fixtures';
-import { useValidate } from '@hooks';
-import { ConfigManager } from '@utils';
+import { useElse } from '@hooks';
+import { ElseProps } from '@types';
 
-import { createElement, FC, PropsWithChildren } from 'react';
+import { FC } from 'react';
 
-export type ElseProps = {};
-
-const Else: FC<PropsWithChildren<ElseProps>> = (props) => {
-  const errors = useValidate(props, 'Else');
-  if (errors.length) {
-    const config = ConfigManager.getInstance();
-    let ch = null;
-    if (config.isShowErrors && config.isShowErrorsInPlace) ch = createElement(Errors, { errors });
-
-    return ch;
-  }
-
-  return <>{props.children}</>;
-};
+const Else: FC<ElseProps> = (props) => <>{useElse(props)}</>;
 
 Else.displayName = Directives.Else;
 

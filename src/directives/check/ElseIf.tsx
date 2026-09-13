@@ -1,28 +1,10 @@
-import { Errors } from '@components';
 import { Directives } from '@fixtures';
-import { useValidate } from '@hooks';
-import { ConfigManager } from '@utils';
+import { useElseIf } from '@hooks';
+import { ElseIfProps } from '@types';
 
-import { createElement, FC, PropsWithChildren } from 'react';
+import { FC } from 'react';
 
-export type ElseIfProps = PropsWithChildren<{
-  condition: boolean;
-}>;
-
-const ElseIf: FC<ElseIfProps> = (props) => {
-  const errors = useValidate(props, 'ElseIf');
-
-  if (errors.length) {
-    const config = ConfigManager.getInstance();
-    let ch = null;
-    if (config.isShowErrors && config.isShowErrorsInPlace) ch = createElement(Errors, { errors });
-    return ch;
-  }
-
-  const { condition } = props;
-
-  return <>{condition && props.children}</>;
-};
+const ElseIf: FC<ElseIfProps> = (props) => <>{useElseIf(props)}</>;
 
 ElseIf.displayName = Directives.ElseIf;
 

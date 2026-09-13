@@ -1,15 +1,1 @@
-export {
-  Else,
-  ElseIf,
-  If,
-  Check,
-  type CheckProps,
-  type IfProps,
-  type ElseIfProps,
-  type ElseProps,
-  Loop,
-  type LoopProps,
-  Template,
-  type TemplateProps,
-  type LoopDataShape,
-} from '@directives';
+export { Check, Else, ElseIf, If, Loop, Template } from '@directives';

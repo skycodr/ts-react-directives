@@ -2,24 +2,22 @@
  * @author SkyCodr (aka: Dulan Sudasinghe)
  * @description This file contains the logic to validate the directives.
  */
-import { LoopDataShape } from '@directives';
-import { Directives, LogicErrors } from '@fixtures';
-import { ReactNode } from 'react';
 
-type ValidatorFn<T extends {} = {}> = (
-  children: Array<Exclude<ReactNode, boolean | null | undefined>>,
-  props?: T,
-) => number[];
+import { Directives, LogicErrors } from '@fixtures';
+import { CheckProps, DataShape, ElseIfProps, ElseProps, IfProps, LoopDataShape, LoopProps, ValidatorFn } from '@types';
+import { Children } from 'react';
 
 /**
  * Validate the children of Check directive
+ *
  * @param children
  * @returns
  */
-const validateCheckChildren: ValidatorFn = (children) => {
+const validateCheckChildren: ValidatorFn<IfProps | ElseIfProps | ElseProps> = (props) => {
   const errors: LogicErrors[] = [];
+  const children = Children.toArray(props.children);
 
-  if (children.length === 0) {
+  if (children?.length === 0) {
     errors.push(LogicErrors.ChildrenExpected);
     return errors;
   }
@@ -43,9 +41,10 @@ const validateCheckChildren: ValidatorFn = (children) => {
  * @param children
  * @returns
  */
-const validateCheck: ValidatorFn = (children) => {
+const validateCheck: ValidatorFn<CheckProps> = (props) => {
   const errors: LogicErrors[] = [];
   const lookupTable: Record<string, number> = {};
+  const children = Children.toArray(props.children);
 
   if (children.length === 0) {
     errors.push(LogicErrors.ChildrenExpected, LogicErrors.IfBlockExpected);
@@ -150,8 +149,37 @@ const validateCheckInvalidElement = (elementName: string, errors: LogicErrors[])
  * @param data
  * @returns
  */
-const validateLoop: ValidatorFn<any> = (children, data?: LoopDataShape<any>) => {
+const validateLoop: ValidatorFn<LoopProps<LoopDataShape<DataShape>>> = (props) => {
   const errors: LogicErrors[] = [];
+
+  const children = Children.toArray(props.children);
+
+  const data = props as LoopDataShape<DataShape>;
+  const { to, from, over, step } = data;
+
+  // Validating props
+  if (over === undefined && from === undefined && to === undefined && step === undefined) {
+    errors.push(LogicErrors.MalformedLoopParams);
+  }
+
+  if (over?.length === 0 || (from === undefined && to === undefined && step === undefined)) {
+    errors.push(LogicErrors.EmptyLoopSource);
+  }
+
+  // if (from === undefined && to === undefined && !over) {
+  //   errors.push(LogicErrors.MalformedLoop);
+  // }
+
+  if (from !== undefined && to !== undefined && step !== undefined) {
+    if (from < 0 || to < 0) {
+      errors.push(LogicErrors.MalformedLoopBounds);
+    }
+    if ((from <= to && step <= 0) || (from >= to && step >= 0)) {
+      errors.push(LogicErrors.InfiniteLoopCondition);
+    }
+  }
+
+  // Validating structure
 
   if (children.length === 0) {
     errors.push(LogicErrors.ChildrenExpected, LogicErrors.TemplateBlockExpected);
@@ -184,7 +212,8 @@ const validateLoop: ValidatorFn<any> = (children, data?: LoopDataShape<any>) => 
  */
 export class ValidationFactory {
   static get(validator: string) {
-    let validatorFn: ValidatorFn = () => [];
+    let validatorFn: ValidatorFn<any> = () => [];
+
     switch (validator) {
       case Directives.Check:
         validatorFn = validateCheck;

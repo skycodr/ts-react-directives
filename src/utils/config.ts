@@ -1,17 +1,9 @@
-type EnvConfigs = {
-  env: 'development' | 'production';
-  showErrors: boolean;
-  showErrorsInProd: boolean;
-  showErrorsInPlace: boolean;
-};
-
-type ProcessMeta = {
-  process?: any;
-  prefix: string;
-};
+import { EnvConfigs, ProcessDataShape } from '@types';
 
 /**
- * Singleton class to manage environment configurations. It reads the configurations from the process environment variables and provides a method to access them. The configurations are cached after the first read for performance optimization.
+ * Singleton class to manage environment configurations. It reads the configurations from the process environment
+ * variables and provides a method to access them. The configurations are cached after the first read for performance
+ * optimization.
  */
 export class ConfigManager {
   private static __instance: ConfigManager;
@@ -20,13 +12,11 @@ export class ConfigManager {
   private constructor() {}
 
   public static getInstance(): ConfigManager {
-    if (!ConfigManager.__instance) {
-      ConfigManager.__instance = new ConfigManager();
-    }
+    if (!ConfigManager.__instance) ConfigManager.__instance = new ConfigManager();
     return ConfigManager.__instance;
   }
 
-  private getProcessMeta(): ProcessMeta {
+  private getProcessMeta(): ProcessDataShape {
     const process = (globalThis as any).process ?? import.meta.env;
     const prefix = import.meta?.env ? 'VITE_' : '';
 
@@ -37,12 +27,14 @@ export class ConfigManager {
     if (this.config) return this.config;
 
     const { process, prefix } = this.getProcessMeta();
+    const mode = process.MODE || process.env?.MODE;
+    const vars = process.env ?? process;
 
     this.config = {
-      env: (process.MODE as EnvConfigs['env']) || 'production',
-      showErrors: process[`${prefix}TRD_SHOW_ERRORS`] === 'true',
-      showErrorsInProd: process[`${prefix}TRD_SHOW_ERRORS_IN_PROD`] === 'true',
-      showErrorsInPlace: process[`${prefix}TRD_SHOW_ERRORS_IN_PLACE`] === 'true',
+      mode: (mode as EnvConfigs['mode']) || 'production',
+      showErrors: vars[`${prefix}TRD_SHOW_ERRORS`] === 'true',
+      showErrorsInProd: vars[`${prefix}TRD_SHOW_ERRORS_IN_PROD`] === 'true',
+      showErrorsInPlace: vars[`${prefix}TRD_SHOW_ERRORS_IN_PLACE`] === 'true',
     };
 
     return this.config;
@@ -56,12 +48,12 @@ export class ConfigManager {
    */
   public getByKey(key: string) {
     const { process } = this.getProcessMeta();
-    return process[key];
+    return process.env[key];
   }
 
   public get isShowErrors() {
     const config = this.getConfig();
-    return config.showErrors && (config.env === 'development' || config.showErrorsInProd);
+    return config.showErrors && (config?.mode !== 'production' || config.showErrorsInProd);
   }
 
   public get isShowErrorsInPlace() {

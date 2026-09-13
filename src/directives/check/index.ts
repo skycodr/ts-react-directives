@@ -1,4 +1,4 @@
-export { default as Check, type CheckProps } from './Check';
-export { default as If, type IfProps } from './If';
-export { default as ElseIf, type ElseIfProps } from './ElseIf';
-export { default as Else, type ElseProps } from './Else';
+export { default as Check } from './Check';
+export { default as Else } from './Else';
+export { default as ElseIf } from './ElseIf';
+export { default as If } from './If';

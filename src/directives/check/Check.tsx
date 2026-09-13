@@ -1,67 +1,10 @@
-import { Errors } from '@components';
 import { Directives } from '@fixtures';
-import { useValidate } from '@hooks';
-import { ConfigManager } from '@utils';
+import { useCheck } from '@hooks';
+import { CheckProps } from '@types';
 
-import {
-  Children,
-  createElement,
-  FC,
-  FunctionComponent,
-  isValidElement,
-  NamedExoticComponent,
-  PropsWithChildren,
-  ReactElement,
-} from 'react';
+import { FC } from 'react';
 
-export type CheckProps = {};
-
-const useCheck = (props: PropsWithChildren) => {
-  const errors = useValidate(props, Directives.Check);
-
-  if (errors.length) {
-    const config = ConfigManager.getInstance();
-
-    if (config.isShowErrors && config.isShowErrorsInPlace) return { children: createElement(Errors, { errors }) };
-
-    return { children: null };
-  }
-
-  const elements = Children.toArray(props.children);
-  const validElements = elements.filter(isValidElement);
-  const child = findChild(validElements);
-
-  return { children: child };
-};
-
-const findChild = (elements: ReactElement[]) => {
-  for (const element of elements) {
-    if (!element || !isValidElement(element)) {
-      continue;
-    }
-
-    const { displayName } = element.type as NamedExoticComponent | FunctionComponent;
-
-    if (displayName) {
-      const { condition } = element.props as { condition: boolean };
-
-      if ((displayName === 'If' || displayName === 'ElseIf') && condition === true) {
-        return element;
-      }
-
-      if (displayName === 'Else') {
-        return element;
-      }
-    }
-  }
-
-  return null;
-};
-
-const Check: FC<PropsWithChildren<CheckProps>> = (props) => {
-  const { children } = useCheck(props);
-  return <>{children}</>;
-};
+const Check: FC<CheckProps> = (props) => <>{useCheck(props)}</>;
 
 Check.displayName = Directives.Check;
 
