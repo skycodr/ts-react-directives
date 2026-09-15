@@ -1,8 +1,13 @@
+/**
+ * @author SkyCodr (aka: Dulan Sudasinghe)
+ * @description Test scenarios for branching logic.
+ */
+
 import { Check, Else, ElseIf, If } from '@directives';
 import { ERRORS, LogicErrors } from '@fixtures';
 import { render } from '@testing-library/react';
 
-describe('tests for <Check>', () => {
+describe('test scenarios for <Check>', () => {
   it('should render content of If block', () => {
     const { getByText } = render(
       <Check>
