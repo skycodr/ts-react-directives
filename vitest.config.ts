@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) =>
         environment: 'jsdom',
         setupFiles: ['./setupTest.ts'],
         include: ['src/__tests__/**.test.{ts,tsx}'],
-        reporters: ['html'],
+        reporters: ['default', 'html'],
         outputFile: './reports/test-report.html',
         coverage: {
           reportsDirectory: './reports/coverage',

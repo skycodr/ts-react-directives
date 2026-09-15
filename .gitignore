@@ -26,4 +26,5 @@ reports
 *.sw?
 .env
 .env.*
+!.env.test
 *.xlsx
