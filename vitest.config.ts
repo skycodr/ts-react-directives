@@ -13,9 +13,9 @@ export default defineConfig(({ mode }) =>
         setupFiles: ['./setupTest.ts'],
         include: ['src/__tests__/**.test.{ts,tsx}'],
         reporters: ['default', 'html'],
-        outputFile: './reports/test-report.html',
+        outputFile: './.vitest/test-report.html',
         coverage: {
-          reportsDirectory: './reports/coverage',
+          reportsDirectory: './.vitest/coverage',
           include: ['src/**/*.{ts,tsx}'],
           exclude: ['src/__tests__/**', '**/*.d.ts', 'src/index.ts', 'src/main.tsx', 'src/examples/**'],
         },
