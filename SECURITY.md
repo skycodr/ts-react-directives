@@ -2,20 +2,56 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+Only the latest release is supported with security fixes. Fixes are shipped
+as new patch releases on npm.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Version | Supported |
+| ------- | --------- |
+| latest  | Yes       |
+| older   | No        |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+Please report suspected security vulnerabilities privately so they can be
+resolved before any public disclosure. Do not open a public issue for security
+problems.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+- **GitHub Security Advisories (preferred):** https://github.com/skycodr/ts-react-directives/security/advisories/new
+- **Email the maintainers:** dulan81@gmail.com
+
+### What to include
+
+- The affected version of `@openbytes/ts-react-directives`.
+- The affected directive or feature (for example `Loop`, `Check`, or the error
+  reporting configuration).
+- A minimal reproduction or a clear description of the vulnerable behaviour.
+- The impact of the issue and any suggested fix, if known.
+
+### What to expect
+
+- Acknowledgement within three business days.
+- Regular status updates until the issue is resolved.
+- A fix released as soon as practical, depending on severity.
+- Coordination on the timing of public disclosure.
+- Credit in the release notes when a report leads to a fix.
+
+## Scope
+
+### In scope
+
+- Vulnerabilities in the published `@openbytes/ts-react-directives` npm package.
+- Vulnerabilities in the build tooling or release pipeline that could affect
+  published artifacts.
+
+### Out of scope
+
+- Issues caused by misuse or misconfiguration in consuming applications.
+- Vulnerabilities in third-party dependencies of consuming applications, which
+  should be reported through their own maintainers.
+- Content issues in the documentation or the demo site.
+
+## Dependencies
+
+The published package depends only on `react` and `react-dom`, which are also
+declared as peer dependencies. Security updates to these packages or to the
+build tooling are reviewed and shipped via patch releases.
