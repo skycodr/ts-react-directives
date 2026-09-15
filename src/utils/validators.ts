@@ -4,7 +4,16 @@
  */
 
 import { Directives, LogicErrors } from '@fixtures';
-import { CheckProps, DataShape, ElseIfProps, ElseProps, IfProps, LoopDataShape, LoopProps, ValidatorFn } from '@types';
+import {
+  CheckProps,
+  DataShape,
+  ElseIfProps,
+  ElseProps,
+  IfProps,
+  LoopComputedShape,
+  LoopProps,
+  ValidatorFn,
+} from '@types';
 import { Children } from 'react';
 
 /**
@@ -149,35 +158,14 @@ const validateCheckInvalidElement = (elementName: string, errors: LogicErrors[])
  * @param data
  * @returns
  */
-const validateLoop: ValidatorFn<LoopProps<LoopDataShape<DataShape>>> = (props) => {
+const validateLoop: ValidatorFn<LoopProps<LoopComputedShape<DataShape>>> = (props) => {
   const errors: LogicErrors[] = [];
 
+  const data = props as LoopComputedShape<DataShape>;
+  const { errors: propErrors } = data;
+  errors.push(...propErrors);
+
   const children = Children.toArray(props.children);
-
-  const data = props as LoopDataShape<DataShape>;
-  const { to, from, over, step } = data;
-
-  // Validating props
-  if (over === undefined && from === undefined && to === undefined && step === undefined) {
-    errors.push(LogicErrors.MalformedLoopParams);
-  }
-
-  if (over?.length === 0 || (from === undefined && to === undefined && step === undefined)) {
-    errors.push(LogicErrors.EmptyLoopSource);
-  }
-
-  // if (from === undefined && to === undefined && !over) {
-  //   errors.push(LogicErrors.MalformedLoop);
-  // }
-
-  if (from !== undefined && to !== undefined && step !== undefined) {
-    if (from < 0 || to < 0) {
-      errors.push(LogicErrors.MalformedLoopBounds);
-    }
-    if ((from <= to && step <= 0) || (from >= to && step >= 0)) {
-      errors.push(LogicErrors.InfiniteLoopCondition);
-    }
-  }
 
   // Validating structure
 
@@ -192,16 +180,6 @@ const validateLoop: ValidatorFn<LoopProps<LoopDataShape<DataShape>>> = (props) =
     if (displayName !== Directives.Template) {
       errors.push(LogicErrors.InvalidElement, LogicErrors.TemplateBlockExpected);
     }
-
-    const { from = 0, to = 0, step = 0 } = data ?? {};
-
-    if (step === 0 || (step > 0 && from > to) || (step < 0 && from < to)) {
-      errors.push(LogicErrors.InfiniteLoopCondition);
-    }
-  }
-
-  if (errors.length) {
-    errors.push(LogicErrors.MalformedLoop);
   }
 
   return errors;

@@ -1,3 +1,3 @@
-export { ConfigManager } from './config';
-export { getErrors, getElementRenderer, getComputedProps } from './helpers';
+export { ConfigManager, configure } from './config';
+export { getComputedProps, getElementRenderer, getErrors } from './helpers';
 export { ValidationFactory } from './validators';

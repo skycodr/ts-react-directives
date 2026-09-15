@@ -1,11 +1,22 @@
 import { LogicErrors } from '@fixtures';
 import { PropsWithChildren, ReactNode } from 'react';
 
+type Nullable<T> = {
+  [P in keyof T]: T[P] | null;
+};
+
 export type EnvConfigs = {
   mode: 'development' | 'production' | 'test';
   showErrors: boolean;
   showErrorsInProd: boolean;
   showErrorsInPlace: boolean;
+};
+
+export type ErrorReportingOptions = {
+  mode?: EnvConfigs['mode'];
+  showErrors?: boolean;
+  showErrorsInProd?: boolean;
+  showErrorsInPlace?: boolean;
 };
 
 export type ProcessDataShape = {
@@ -32,6 +43,10 @@ export type LoopDataShape<T extends DataShape> = {
   step?: number;
   over?: T[];
 };
+
+export type LoopComputedShape<T> = {
+  errors: LogicErrors[];
+} & Nullable<LoopDataShape<T>>;
 
 export type LoopProps<T extends DataShape> = PropsWithChildren<LoopDataShape<T>>;
 

@@ -1,4 +1,9 @@
-import { LogicErrors } from './enums';
+/**
+ * @author SkyCodr (aka: Dulan Sudasinghe)
+ * @description All lib level constants are defined here
+ */
+
+import { LogicErrors } from '@fixtures';
 
 export const ERRORS: Record<LogicErrors, string> = {
   [LogicErrors.IfBlockExpected]: "Missing 'If'",

@@ -1,4 +1,15 @@
+/**
+ * @author SkyCodr (aka: Dulan Sudasinghe)
+ * @description All lib level constants are defined here
+ */
+
 export enum LogicErrors {
+  // General
+
+  InvalidElement = 3002,
+  ChildrenExpected = 3003,
+  SingleChildExpected = 3004,
+
   // Check
   IfBlockExpected = 1001,
   OnlyOneIfBlockExpected = 1002,
@@ -16,12 +27,6 @@ export enum LogicErrors {
   TemplateBlockExpected = 2012,
   OnlyOneTemplateBlockExpected = 2013,
   EmptyLoopSource = 2014,
-
-  // General
-
-  InvalidElement = 3002,
-  ChildrenExpected = 3003,
-  SingleChildExpected = 3004,
 }
 
 export enum Directives {
