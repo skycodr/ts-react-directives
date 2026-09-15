@@ -40,7 +40,9 @@ For features and how-to get started [Refer to the developer guide](./DEVELOPER.m
 
 ## Todo
 
-- Ability to ad direct declarative children to template.
+- Add direct declarative children to Loop/Templates.
+- Add breakOn and continueOn capability
+- Add filters
 - Exhaustive unit tests for loops
 - Refactor unit tests
 
