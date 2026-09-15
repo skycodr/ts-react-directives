@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.1.2](https://github.com/skycodr/ts-react-directives/compare/v2.1.1...v2.1.2) (2026-09-15)
+
+### Bug Fixes
+
+* gh-pages rendering issue ([2877ac8](https://github.com/skycodr/ts-react-directives/commit/2877ac8dc23a34b0d3b105cf8714ed470f875422))
 ## [2.1.1](https://github.com/skycodr/ts-react-directives/compare/v2.1.0...v2.1.1) (2026-09-15)
 
 ### Bug Fixes
