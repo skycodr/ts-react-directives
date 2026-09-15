@@ -1,5 +1,5 @@
 import { defineConfig, mergeConfig } from 'vitest/config';
-import viteConfig from './vite.config';
+import viteConfig from './vite.config.ts';
 import { loadEnv } from 'vite';
 
 export default defineConfig(({ mode }) =>

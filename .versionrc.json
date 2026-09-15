@@ -1,0 +1,15 @@
+{
+  "types": [
+    { "type": "feat", "section": "Features" },
+    { "type": "fix", "section": "Bug Fixes" },
+    { "type": "perf", "section": "Performance" },
+    { "type": "refactor", "section": "Refactoring" },
+    { "type": "chore", "section": "Chore" },
+    { "type": "docs", "section": "Documentation" },
+    { "type": "build", "section": "Build" },
+    { "type": "test", "section": "Tests" }
+  ],
+  "releaseCommitMessageFormat": "chore(release): {{currentTag}} [skip ci]",
+  "packageFiles": ["package.json"],
+  "bumpFiles": ["package.json"]
+}

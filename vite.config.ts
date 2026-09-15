@@ -4,7 +4,6 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import { libInjectCss } from 'vite-plugin-lib-inject-css';
-import tsConfigPaths from 'vite-tsconfig-paths';
 
 const libraryName = 'ts-react-directives';
 
@@ -12,7 +11,6 @@ const libraryName = 'ts-react-directives';
 export default defineConfig({
   plugins: [
     react(),
-    tsConfigPaths(),
     libInjectCss(),
     dts({
       insertTypesEntry: true,
@@ -26,7 +24,7 @@ export default defineConfig({
   build: {
     emptyOutDir: true,
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
+      entry: path.resolve(import.meta.dirname, 'src/index.ts'),
       name: libraryName,
       formats: ['es', 'cjs', 'umd'],
       fileName: (format) => `${libraryName}.${format}.js`,
@@ -44,9 +42,11 @@ export default defineConfig({
     },
   },
   resolve: {
+    // Vite resolves the @* aliases declared in tsconfig.json natively; '@assets'
+    // still needs an explicit folder alias because it has no index file.
+    tsconfigPaths: true,
     alias: {
-      // Since assets doesn't have an index file, need to specify the path to the folder
-      '@assets': path.resolve(__dirname, 'src/assets'),
+      '@assets': path.resolve(import.meta.dirname, 'src/assets'),
     },
   },
   preview: {

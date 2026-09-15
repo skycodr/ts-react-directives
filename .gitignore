@@ -25,4 +25,4 @@ reports
 *.sw?
 .env
 .env.*
-logic-validation-sheet.xlsx
+*.xlsx
