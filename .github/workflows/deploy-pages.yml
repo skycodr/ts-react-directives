@@ -1,11 +1,12 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [master]
+  workflow_dispatch
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
@@ -37,4 +38,3 @@ jobs:
           publish_dir: ./dist/examples
           publish_branch: gh-pages
           allow_empty_commit: true
-          force_orphan: true
