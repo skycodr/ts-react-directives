@@ -20,5 +20,5 @@ export default defineConfig({
       '@assets': path.resolve(import.meta.dirname, 'src/assets'),
     },
   },
-  base: '/ts-react-directives/',
+  base: './',
 });
