@@ -1,15 +1,5 @@
 # Security Policy
 
-## Supported Versions
-
-Only the latest release is supported with security fixes. Fixes are shipped
-as new patch releases on npm.
-
-| Version | Supported |
-| ------- | --------- |
-| latest  | Yes       |
-| older   | No        |
-
 ## Reporting a Vulnerability
 
 Please report suspected security vulnerabilities privately so they can be
@@ -17,22 +7,19 @@ resolved before any public disclosure. Do not open a public issue for security
 problems.
 
 - **GitHub Security Advisories (preferred):** https://github.com/skycodr/ts-react-directives/security/advisories/new
-- **Email the maintainers:** dulan81@gmail.com
+- **Email the maintainers:** dulan81_at_g_mail
 
 ### What to include
 
 - The affected version of `@openbytes/ts-react-directives`.
 - The affected directive or feature (for example `Loop`, `Check`, or the error
   reporting configuration).
-- A minimal reproduction or a clear description of the vulnerable behaviour.
+- A minimal reproduction or a clear description of the vulnerable behavior.
 - The impact of the issue and any suggested fix, if known.
 
 ### What to expect
 
-- Acknowledgement within three business days.
-- Regular status updates until the issue is resolved.
 - A fix released as soon as practical, depending on severity.
-- Coordination on the timing of public disclosure.
 - Credit in the release notes when a report leads to a fix.
 
 ## Scope
@@ -53,5 +40,4 @@ problems.
 ## Dependencies
 
 The published package depends only on `react` and `react-dom`, which are also
-declared as peer dependencies. Security updates to these packages or to the
-build tooling are reviewed and shipped via patch releases.
+declared as peer dependencies. Any security updates made to these packages or to the build tooling, which affects this package will be reviewed and fixed via patch releases.

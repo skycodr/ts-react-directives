@@ -2,28 +2,32 @@
 
 [![npm version](https://img.shields.io/npm/v/@openbytes/ts-react-directives)](https://www.npmjs.com/package/@openbytes/ts-react-directives)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.md)
+[![React](https://img.shields.io/badge/react-%5E19.0.0-blue)](https://react.dev)
 
 ## About
 
-**ts-react-directives** is a small React/Typescript library designed to mimic 'Angular' directives. This is not a static library. It's meant to be used as declarative component. Also, it alleviates the limitations and cognitive complexity created by the ternary operations when using conditional rendering.
+**ts-react-directives** is a small React/Typescript library designed to mimic 'Angular' `ngIf`, `ngFor` directives. And uses declarative syntax for logic branching and iteration.
 
-## How to install
+## Features
 
-Using NPM
+- **`Check` / `If` / `ElseIf` / `Else`** — _`JSX`_ tags for conditional branching.
+- **`Loop` / `Template`** — tags for iterative logic.
+- **TypeScript** — fully supported.
+- **Nestable logic** — tags can be nested logically.
+- **Validation** — dead-lock, crash-detection and ordinal validation.
+- **Stable id** — automatically add stable `key`, between render teardown for iterable items.
+- **No ternary soup** — declarative markup to avoid ternary nesting.
+- **Tree-shakeable builds** — published as ESM, CJS and UMD with bundled type declarations.
+- **Zero runtime dependencies** — only `react` / `react-dom` as peers.
+- **Opt-in error reporting** — malformed directives can render a styled, in-place error list while
+  developing, and are silent by default in production.
+- **Precompiled styles** — ships its own compiled stylesheet.
 
-```npm
-npm install @openbytes/ts-react-directives
-```
+## Getting Started
 
-Using PNPM (preferred)
+For features and how-to get started [Refer to the developer guide](./DEVELOPER.md). It demonstrates how to use the the library. If you want to see it an action refer to the demo below.
 
-```pnpm
-pnpm add @openbytes/ts-react-directives
-```
-
-## Demo
-
-[Go to the demo/examples project](https://skycodr.github.io/ts-react-directives/)
+[Click here demo](https://skycodr.github.io/ts-react-directives/)
 
 ## Documentation
 
@@ -33,6 +37,12 @@ pnpm add @openbytes/ts-react-directives
   [SECURITY.md](./SECURITY.md)
 - **License** - MIT: [LICENSE.md](./LICENSE.md)
 - **Authors** - [AUTHORS.md](./AUTHORS.md)
+
+## Todo
+
+- Ability to ad direct declarative children to template.
+- Exhaustive unit tests for loops
+- Refactor unit tests
 
 ## Issues
 

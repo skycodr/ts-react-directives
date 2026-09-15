@@ -10,49 +10,34 @@ cognitive load of nested ternary expressions and verbose `map()` blocks.
 
 ## Table of contents
 
-- [Features](#features)
-- [Interactive demo and screenshots](#interactive-demo-and-screenshots)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Conditional rendering: `Check`, `If`, `ElseIf`, `Else`](#conditional-rendering-check-if-elseif-else)
-  - [Loops: `Loop` and `Template`](#loops-loop-and-template)
-  - [Nesting directives](#nesting-directives)
-- [Error reporting (opt-in)](#error-reporting-opt-in)
-  - [Runtime configuration with `configure()`](#runtime-configuration-with-configure)
-  - [Environment variables (Node / SSR only)](#environment-variables-node--ssr-only)
-  - [Precedence](#precedence)
-- [Styling and overriding the error list](#styling-and-overriding-the-error-list)
-  - [Default styles](#default-styles)
-  - [Public style hooks](#public-style-hooks)
-  - [Tailwind caveats](#tailwind-caveats)
-- [Project structure](#project-structure)
-- [Available scripts](#available-scripts)
-- [License, security and authors](#license-security-and-authors)
+- [ts-react-directives — Developer Guide](#ts-react-directives--developer-guide)
+  - [Table of contents](#table-of-contents)
+  - [Examples \& demo](#examples--demo)
+  - [Installation](#installation)
+    - [_Requirements_](#requirements)
+  - [Usage](#usage)
+    - [Conditional rendering: `Check`, `If`, `ElseIf`, `Else`](#conditional-rendering-check-if-elseif-else)
+    - [Loops: `Loop` and `Template`](#loops-loop-and-template)
+    - [Nesting directives](#nesting-directives)
+  - [Error reporting (opt-in)](#error-reporting-opt-in)
+    - [Runtime configuration with `configure()`](#runtime-configuration-with-configure)
+    - [Environment variables (Node / SSR only)](#environment-variables-node--ssr-only)
+    - [Precedence](#precedence)
+  - [Styling and overriding the error list](#styling-and-overriding-the-error-list)
+    - [Default styles](#default-styles)
+    - [Public style hooks](#public-style-hooks)
+    - [Tailwind caveats](#tailwind-caveats)
+  - [Project structure](#project-structure)
+  - [Available scripts](#available-scripts)
+  - [License, security and authors](#license-security-and-authors)
 
 ---
 
-## Features
+## Examples & demo
 
-- **`Check` / `If` / `ElseIf` / `Else`** — mutually exclusive conditional branches. `Check` renders
-  the first matching `If` or `ElseIf`; if none match, it renders `Else`.
-- **`Loop`** — iterates over an array (`over`) or a numeric range (`from`, `to`, `step`).
-- **`Template`** — a render-function child that receives `{ data, index }` for each iteration, with
-  full TypeScript inference for the item type.
-- **No ternary soup** — declarative markup that reads like Angular `*ngIf` / `*ngFor`.
-- **Tree-shakeable builds** — published as ESM, CJS and UMD with bundled type declarations.
-- **Zero runtime dependencies** — only `react` / `react-dom` as peers.
-- **Opt-in error reporting** — malformed directives can render a styled, in-place error list while
-  developing, and are silent by default in production.
-- **Precompiled styles** — ships its own compiled stylesheet, so no Tailwind setup is required in
-  the consuming application.
+See a demo with several examples (and the source for each) is published to GitHub Pages: **[demo](https://skycodr.github.io/ts-react-directives/)**
 
-## Interactive demo and screenshots
-
-A fully interactive demo with every example (and the source for each) is published to GitHub Pages:
-
-**[Open the live demo](https://skycodr.github.io/ts-react-directives/)**
-
-Screenshots of the demo (taken at viewport 1440×960):
+_**Examples**:_
 
 ![Conditional rendering with If / ElseIf / Else](./docs/screenshots/conditional-rendering.png)
 
@@ -71,7 +56,7 @@ capturing each example view.
 
 ## Installation
 
-**Requirements**
+### _Requirements_
 
 - Node.js >= 18
 - React 19 and `react-dom` 19 as peer dependencies (installed together with the library)
@@ -79,7 +64,7 @@ capturing each example view.
 **Recommended toolchain:** pnpm + Vite. The library is however bundler-agnostic and works with any
 Vite, webpack, Rollup or esbuild setup, as well as SSR runtimes.
 
-Using **pnpm** (preferred):
+Using **pnpm** _(preferred)_:
 
 ```shell
 pnpm add @openbytes/ts-react-directives
@@ -355,14 +340,11 @@ picks yours.
 ## Project structure
 
 ```text
-.
-├── docs/
-│   ├── screenshots/          # demo screenshots used by this guide
-│   └── DEVELOPER.md          # this document
 ├── public/                   # demo site static assets
 ├── src/
 │   ├── directives/           # Check, If, ElseIf, Else, Loop, Template
 │   ├── components/           # Errors.tsx — styled error list with trd-* hooks
+│   ├── hooks/                # hooks for the directives
 │   ├── utils/                # ConfigManager + configure() runtime API
 │   ├── types/                # shared public types (ErrorReportingOptions, ...)
 │   ├── fixtures/             # error messages and logic validation

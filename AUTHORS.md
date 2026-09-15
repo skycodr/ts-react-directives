@@ -2,4 +2,8 @@
 
 ## Project Lead
 
-- **SkyCodr** - [skycodr@openbytes.com](mailto:dulan81@gmail.com)
+- **SkyCodr** (aka: Dulan Sudasinghe) - `[dulan81]_[at]_[g_mail]_[com]`
+
+## Current Maintainers
+
+- **SkyCodr**
