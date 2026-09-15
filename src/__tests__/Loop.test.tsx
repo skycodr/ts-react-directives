@@ -147,13 +147,11 @@ describe('Test scenarios for <Loop>', () => {
   });
 
   it('should not render, if indeterministic loop', () => {
-    const { container, debug } = render(
+    const { container } = render(
       <Loop over={[1, 2, 3]} from={0} to={2} step={-1}>
         <Template<number>>{({ data }) => <span>{data}</span>}</Template>
       </Loop>,
     );
-
-    debug();
 
     expect(container.querySelector('.trd-error-list')).toBeInTheDocument();
   });
