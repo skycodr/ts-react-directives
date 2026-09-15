@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.1.1](https://github.com/skycodr/ts-react-directives/compare/v2.1.0...v2.1.1) (2026-09-15)
+
+### Bug Fixes
+
+* **github actions:** fixing tag issue ([51072bf](https://github.com/skycodr/ts-react-directives/commit/51072bf0b0bc614f39051ce3b31d101559400395))
 ## [2.1.0](https://github.com/skycodr/ts-react-directives/compare/v1.2.0...v2.1.0) (2026-09-15)
 
 ### Bug Fixes
