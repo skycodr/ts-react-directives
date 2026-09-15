@@ -71,9 +71,14 @@ jobs:
         run: |
           awk 'BEGIN { rs=0 } /^## / { rs++ } rs == 1 { print } rs == 2 { exit }' CHANGELOG.md > release-notes.txt
 
+      - name: Extract version from tag
+        id: version
+        run: echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.version.outputs.tag }}
           body_path: release-notes.txt
 
       - name: Build examples
