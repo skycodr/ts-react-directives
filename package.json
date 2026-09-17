@@ -47,7 +47,7 @@
     }
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config vite.config.dev.ts --mode dev",
     "clean": "rimraf dist",
     "preview": "vite preview --config vite.config.examples.ts",
     "build:lib": "tsc -b && vite build",
