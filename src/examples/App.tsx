@@ -31,15 +31,15 @@ type ExampleEntry = {
 };
 
 const examples: ExampleEntry[] = [
-  { id: 1, label: 'If / ElseIf / Else (grade)', component: Example1, source: example1Source },
-  { id: 2, label: 'Loop over a list', component: Example2, source: example2Source },
-  { id: 3, label: 'Numeric range (odd numbers)', component: Example3, source: example3Source },
-  { id: 4, label: 'Descending countdown', component: Example4, source: example4Source },
-  { id: 5, label: 'If / ElseIf / Else (score)', component: Example5, source: example5Source },
+  { id: 1, label: 'Conditional rendering with If', component: Example1, source: example1Source },
+  { id: 2, label: 'Flip-Flop with If / Else', component: Example2, source: example2Source },
+  { id: 3, label: 'Slide for grades with If / ElseIf / Else', component: Example3, source: example3Source },
+  { id: 4, label: 'Simple declarative Loop', component: Example4, source: example4Source },
+  { id: 5, label: 'Odd numbers with (numeric range)', component: Example5, source: example5Source },
   { id: 6, label: 'Loop with nested inline component', component: Example6, source: example6Source },
-  { id: 7, label: 'Depth-3: Loop → Loop → Check (org tree)', component: Example7, source: example7Source },
+  { id: 7, label: 'Mixed nested directives', component: Example7, source: example7Source },
   { id: 8, label: 'In-place errors (Loop + Check)', component: Example8, source: example8Source },
-  { id: 9, label: 'Simple Loop declarative syntax', component: Example9, source: example9Source },
+  { id: 9, label: 'Nested Loop (2D matrix)', component: Example9, source: example9Source },
 ];
 
 function App() {
@@ -142,7 +142,7 @@ function App() {
                 }}
                 codeTagProps={{ style: { fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' } }}
               >
-                {Active.source}
+                {Active.source.replace('@directives', '@openbytes/ts-react-directive')}
               </SyntaxHighlighter>
             </div>
           </section>

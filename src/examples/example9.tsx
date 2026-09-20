@@ -1,42 +1,42 @@
-import { Loop, Template, withLoop } from '@directives';
+import { Loop } from '@directives';
 import { IteratorProps } from '@types';
 import { FC } from 'react';
-/**
- * Your code will have the above line as:
- *
- * import { ... } from '@openbytes/ts-react-directives';
- */
 
-const fruits = ['Apple', 'Banana', 'Cherry', 'Mango', 'Orange', 'Pineapple'];
+const matrix = [
+  [1, 2, 3, 4],
+  [5, 6, 7, 8],
+  [9, 10, 11, 12],
+];
 
-const ListItem: FC<IteratorProps<string>> = (props) => {
-  const { data, index } = props;
+const Cell: FC<IteratorProps<number>> = ({ data }) => {
   return (
-    <li className="px-3 py-2 bg-white border border-gray-200 rounded-md shadow-sm">
-      <span className="font-medium text-gray-700">
-        {index! + 1}. {data}
-      </span>
-    </li>
+    <span className="flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 bg-white font-mono text-gray-700 shadow-sm">
+      {data}
+    </span>
   );
 };
 
-const WrappedListItem = withLoop(ListItem);
-
 /**
- * Example 9: Loop over an array using the Template directive.
+ * Example 9: Two nested loops rendering a 2D array (matrix).
+ * The outer loop renders each row, the inner loop renders each cell.
  */
-
 const Example9 = () => {
   return (
     <section>
-      <h2 className="text-xl font-semibold">Example 9: Simple Loop declarative syntax</h2>
-      <ul className="mt-3 space-y-1">
-        <Loop over={fruits}>
-          <Template<string>>
-            <WrappedListItem />
-          </Template>
+      <h2 className="text-xl font-semibold mb-3">Example 9: Nested Loop — 2D matrix</h2>
+      <div className="space-y-2">
+        <Loop over={matrix}>
+          {({ data: row }) =>
+            row && (
+              <div className="flex gap-2">
+                <Loop over={row}>
+                  <Cell />
+                </Loop>
+              </div>
+            )
+          }
         </Loop>
-      </ul>
+      </div>
     </section>
   );
 };
