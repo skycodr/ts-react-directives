@@ -2,10 +2,10 @@ import { Loop } from '@directives';
 import { IteratorProps } from '@types';
 import { FC } from 'react';
 
-type CountDownType = {
+type CountDownProps = {
   styleClasses?: string;
 };
-const CountDown: FC<IteratorProps<number, CountDownType>> = ({ data, styleClasses }) => {
+const CountDown: FC<IteratorProps<number, CountDownProps>> = ({ data, styleClasses }) => {
   return <span className={`w-10 h-10 flex items-center justify-center rounded-full ${styleClasses}`}>{data}</span>;
 };
 

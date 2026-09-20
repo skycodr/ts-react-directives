@@ -2,7 +2,7 @@ import { Check, Else, If, Loop } from '@directives';
 import { IteratorProps } from '@types';
 import { FC } from 'react';
 
-export interface Project {
+interface Project {
   name: string;
   active: boolean;
   members: number;

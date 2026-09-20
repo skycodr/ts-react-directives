@@ -1,12 +1,21 @@
 import { Check, Else, ElseIf, If } from '@directives';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { Slider } from './HelperComponents';
 
 const ticks = [0, 35, 60, 80, 95, 100];
 
+type GradeProps = {
+  value: string;
+  color: string;
+};
+const Grade: FC<GradeProps> = ({ value, color }) => {
+  return <span className={`px-3 py-2 rounded-md font-medium bg-${color}-100 text-${color}-800`}>{value}</span>;
+};
 /**
  * Example 3: Tick slider — slide between grades and see the band per position.
  * 0-34 = R, 35-59 = S, 60-79 = C, 80-94 = B, 95-100 = A
+ *
+ * Note! this is just an example to show how to use declarative syntax.
  */
 const Example3 = () => {
   const [score, setScore] = useState(0);
@@ -20,19 +29,19 @@ const Example3 = () => {
       <div className="mt-4">
         <Check>
           <If condition={score < 35}>
-            <span className="px-3 py-2 rounded-md font-medium bg-red-100 text-red-800">R</span>
+            <Grade value="R" color="red" />
           </If>
           <ElseIf condition={score < 60}>
-            <span className="px-3 py-2 rounded-md font-medium bg-amber-100 text-amber-800">S</span>
+            <Grade value="S" color="amber" />
           </ElseIf>
           <ElseIf condition={score < 80}>
-            <span className="px-3 py-2 rounded-md font-medium bg-blue-100 text-blue-800">C</span>
+            <Grade value="C" color="blue" />
           </ElseIf>
           <ElseIf condition={score < 95}>
-            <span className="px-3 py-2 rounded-md font-medium bg-green-100 text-green-800">B</span>
+            <Grade value="B" color="green" />
           </ElseIf>
           <Else>
-            <span className="px-3 py-2 rounded-md font-medium bg-emerald-100 text-emerald-800">A</span>
+            <Grade value="A" color="emerald" />
           </Else>
         </Check>
       </div>
