@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.0.0](https://github.com/skycodr/ts-react-directives/compare/v2.3.0...v3.0.0) (2026-09-20)
+
+### ⚠ BREAKING CHANGES
+
+* **declarative loops:** add capability for fully declarative loops
+
+### Features
+
+* **declarative loops:** add capability for fully declarative loops ([63a4c6d](https://github.com/skycodr/ts-react-directives/commit/63a4c6d40828623eeab5f862c674871bca7d1c56))
+
+### Refactoring
+
+* examples ([a7badd9](https://github.com/skycodr/ts-react-directives/commit/a7badd9dfc6e069846b262e9f04b5ab88dc19272))
+
+### Documentation
+
+* modified developer and readme files ([7ae3542](https://github.com/skycodr/ts-react-directives/commit/7ae3542ee0eadf2d837fd71bd2450e8bcae1531b))
+
+### Tests
+
+* modified tests for loops ([5c740dd](https://github.com/skycodr/ts-react-directives/commit/5c740dd086db54ed67eefd8efdb9ba02fc9d6563))
 ## [2.3.0](https://github.com/skycodr/ts-react-directives/compare/v2.2.0...v2.3.0) (2026-09-20)
 
 ### Bug Fixes
