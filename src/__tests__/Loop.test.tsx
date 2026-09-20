@@ -3,7 +3,7 @@
  * @description Test scenarios for Loop directives.
  *
  */
-import { Loop, Template } from '@directives';
+import { Loop } from '@directives';
 import { render } from '@testing-library/react';
 import { DataShape, LoopDataShape } from '@types';
 import { ReactElement } from 'react';
@@ -13,11 +13,7 @@ describe('Test scenarios for <Loop>', () => {
   const chr_arr = ['a', 'b', 'c', 'd', 'e'];
 
   function getComponent<T extends DataShape>(props: LoopDataShape<T>): ReturnType<typeof render> {
-    return render(
-      <Loop {...props}>
-        <Template<T>>{({ data, index: _i }) => <span>{data as unknown as ReactElement}</span>}</Template>
-      </Loop>,
-    );
+    return render(<Loop {...props}>{({ data, index: _i }) => <span>{data as unknown as ReactElement}</span>}</Loop>);
   }
 
   describe('Test suites for iterating over an array, successfully', () => {
@@ -87,41 +83,25 @@ describe('Test scenarios for <Loop>', () => {
    * TODO: Add exhaustive checks.
    */
   it('should not render, if no params are provided', () => {
-    const { container } = render(
-      <Loop>
-        <Template<number>>{({ data }) => <span>{data}</span>}</Template>
-      </Loop>,
-    );
+    const { container } = render(<Loop>{({ data }) => <span>{data}</span>}</Loop>);
 
     expect(container.querySelector('.trd-error-list')).toBeInTheDocument();
   });
 
   it('should not render, if empty array is provided', () => {
-    const { container } = render(
-      <Loop over={[]}>
-        <Template<number>>{({ data }) => <span>{data}</span>}</Template>
-      </Loop>,
-    );
+    const { container } = render(<Loop over={[]}>{({ data }) => <span>{data}</span>}</Loop>);
 
     expect(container.querySelector('.trd-error-list')).toBeInTheDocument();
   });
 
   it('should not render, if only step is provided', () => {
-    const { container } = render(
-      <Loop step={1}>
-        <Template<number>>{({ data }) => <span>{data}</span>}</Template>
-      </Loop>,
-    );
+    const { container } = render(<Loop step={1}>{({ data }) => <span>{data}</span>}</Loop>);
 
     expect(container.querySelector('.trd-error-list')).toBeInTheDocument();
   });
 
   it('should not render, if step = 0 irrespective of other params', () => {
-    const { container } = render(
-      <Loop step={0}>
-        <Template<number>>{({ data }) => <span>{data}</span>}</Template>
-      </Loop>,
-    );
+    const { container } = render(<Loop step={0}>{({ data }) => <span>{data}</span>}</Loop>);
 
     expect(container.querySelector('.trd-error-list')).toBeInTheDocument();
   });
@@ -129,7 +109,7 @@ describe('Test scenarios for <Loop>', () => {
   it('should not render, if out of bounds', () => {
     const { container } = render(
       <Loop over={[1, 2, 3]} from={-1} to={-1}>
-        <Template<number>>{({ data }) => <span>{data}</span>}</Template>
+        {({ data }) => <span>{data}</span>}
       </Loop>,
     );
 
@@ -139,7 +119,7 @@ describe('Test scenarios for <Loop>', () => {
   it('should not render, if out of bounds 2', () => {
     const { container } = render(
       <Loop over={[1, 2, 3]} from={-1} to={3}>
-        <Template<number>>{({ data }) => <span>{data}</span>}</Template>
+        {({ data }) => <span>{data}</span>}
       </Loop>,
     );
 
@@ -149,7 +129,7 @@ describe('Test scenarios for <Loop>', () => {
   it('should not render, if indeterministic loop', () => {
     const { container } = render(
       <Loop over={[1, 2, 3]} from={0} to={2} step={-1}>
-        <Template<number>>{({ data }) => <span>{data}</span>}</Template>
+        {({ data }) => <span>{data}</span>}
       </Loop>,
     );
 
@@ -159,7 +139,7 @@ describe('Test scenarios for <Loop>', () => {
   it('should not render, if indeterministic loop', () => {
     const { container } = render(
       <Loop over={[1, 2, 3]} from={0} to={2} step={-1}>
-        <Template<number>>{({ data }) => <span>{data}</span>}</Template>
+        {({ data }) => <span>{data}</span>}
       </Loop>,
     );
 
@@ -169,7 +149,7 @@ describe('Test scenarios for <Loop>', () => {
   it('should not render, if indeterministic loop 2', () => {
     const { container } = render(
       <Loop from={10} to={2} step={1}>
-        <Template<number>>{({ data }) => <span>{data}</span>}</Template>
+        {({ data }) => <span>{data}</span>}
       </Loop>,
     );
 
@@ -179,7 +159,7 @@ describe('Test scenarios for <Loop>', () => {
   it('should not render, if indeterministic loop 3', () => {
     const { container } = render(
       <Loop from={10} step={1}>
-        <Template<number>>{({ data }) => <span>{data}</span>}</Template>
+        {({ data }) => <span>{data}</span>}
       </Loop>,
     );
 
@@ -189,7 +169,7 @@ describe('Test scenarios for <Loop>', () => {
   it('should not render, if indeterministic loop 4', () => {
     const { container } = render(
       <Loop to={2} step={1}>
-        <Template<number>>{({ data }) => <span>{data}</span>}</Template>
+        {({ data }) => <span>{data}</span>}
       </Loop>,
     );
 
