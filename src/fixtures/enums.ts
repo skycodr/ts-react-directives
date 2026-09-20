@@ -27,6 +27,7 @@ export enum LogicErrors {
   TemplateBlockExpected = 2012,
   OnlyOneTemplateBlockExpected = 2013,
   EmptyLoopSource = 2014,
+  MaxLoopIterationsExceeded = 2015,
 }
 
 export enum Directives {
@@ -35,7 +36,6 @@ export enum Directives {
   Else = 'Else',
   Check = 'Check',
   Loop = 'Loop',
-  LoopProps = 'LoopProps',
   Template = 'Template',
   Unknown = 'Unknown',
 }

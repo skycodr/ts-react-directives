@@ -23,4 +23,5 @@ export const ERRORS: Record<LogicErrors, string> = {
   [LogicErrors.SingleChildExpected]: 'Can have only a single child',
   [LogicErrors.MalformedLoopBounds]: 'Malformed loop bounds',
   [LogicErrors.MalformedLoopParams]: 'Malformed loop params',
+  [LogicErrors.MaxLoopIterationsExceeded]: 'Maximum loop iterations exceeded',
 };

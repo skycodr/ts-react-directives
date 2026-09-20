@@ -8,7 +8,7 @@ import { Loop, Template } from '@directives';
 const fruits = ['Apple', 'Banana', 'Cherry', 'Mango', 'Orange', 'Pineapple'];
 
 /**
- * Example 2: Loop over an array using the Template directive.
+ * Example 2: Loop over an array using the inline component.
  */
 const Example2 = () => {
   return (

@@ -21,6 +21,5 @@ import { PropsWithChildren, useMemo } from 'react';
  * @returns Returns a validator function.
  */
 export const useValidationFactory = <T>(props: PropsWithChildren<T>, type: string) => {
-  // const validatorFn =
   return useMemo(() => ValidationFactory.get(type), [type])(props);
 };

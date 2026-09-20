@@ -18,7 +18,9 @@ cognitive load of nested ternary expressions and verbose `map()` blocks.
   - [Usage](#usage)
     - [Conditional rendering: `Check`, `If`, `ElseIf`, `Else`](#conditional-rendering-check-if-elseif-else)
     - [Loops: `Loop` and `Template`](#loops-loop-and-template)
+    - [Higher-order component: `withLoop`](#higher-order-component-withloop)
     - [Nesting directives](#nesting-directives)
+    - [API reference](#api-reference)
   - [Error reporting (opt-in)](#error-reporting-opt-in)
     - [Runtime configuration with `configure()`](#runtime-configuration-with-configure)
     - [Environment variables (Node / SSR only)](#environment-variables-node--ssr-only)
@@ -163,6 +165,47 @@ const OddNumbers = () => (
 The `Template` render-function receives `{ data: T, index: number }`, where `T` is inferred from the
 generic you pass to `Template`, or from the item type of `over`.
 
+### Higher-order component: `withLoop`
+
+When a reusable component should be reused **directly as a `Loop` child** — instead of wrapping its
+usage site in a `Template` callback — use the `withLoop` HOC. It injects `data` and `index` props into
+any component, turning a plain presentational component into a `Loop`-ready child.
+
+```tsx
+import { Loop, Template, withLoop } from '@openbytes/ts-react-directives';
+import { IteratorProps } from '@openbytes/ts-react-directives';
+
+const FruitListItem = ({ data, index }: IteratorProps<string>) => (
+  <li>
+    {index! + 1}. {data}
+  </li>
+);
+
+// Wrap once, at module scope:
+const WrappedListItem = withLoop(FruitListItem);
+
+const FruitList = () => (
+  <ul>
+    <Loop over={['Apple', 'Banana', 'Cherry', 'Mango']}>
+      <Template<string>>
+        <WrappedListItem />
+      </Template>
+    </Loop>
+  </ul>
+);
+```
+
+Behavior notes:
+
+- `withLoop` **does not change rendering semantics** — it only injects `data: T` and `index: number`
+  as props. It is a pure composition helper, not a sibling of `Template`.
+- The component receives the same `{ data, index }` shape that a `Template` render-function gets, so
+  it can still rely on `index` for stable `key` generation.
+- Declare the props with `IteratorProps<T>` (or `IteratorProps<T, P>` to add your own props alongside
+  the injected ones) to get full type inference and `data` / `index` autocompletion.
+- Typical use: reusable row / card components that should stay framework-agnostic and be flushed
+  directly into a `Loop`.
+
 ### Nesting directives
 
 Directives compose naturally — `Loop` and `Check` can be nested to arbitrary depth.
@@ -188,6 +231,54 @@ const RoleMatrix = () => (
   </Loop>
 );
 ```
+
+## API reference
+
+Public surface of `@openbytes/ts-react-directives`. Everything below is importable from the package
+entry point:
+
+```ts
+import { Check, Else, ElseIf, If, Loop, Template, withLoop, configure } from '@openbytes/ts-react-directives';
+```
+
+> [!NOTE]
+> Every exported component and HOC is a **callable component** — the same identifiers work both as
+> JSX elements and as the render-function API. `IteratorProps`, `LoopProps` and the other exported
+> types exist purely for TS consumers; they are erased at runtime.
+
+### Components
+
+| API        | Use case                                   | Description                                                                                     |
+| ---------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| `Check`    | Group mutually exclusive branches           | Container for a chain of `If` / `ElseIf` / `Else`. The first branch whose `condition` is `true` wins; if none match, `Else` renders. Invalid as a child of `Check` itself. |
+| `If`       | First branch of a condition chain          | Renders its children when `condition === true`. Must be the first element inside a `Check`.      |
+| `ElseIf`   | Additional branch in a condition chain     | Renders its children when its own `condition` is `true` and every earlier branch failed.         |
+| `Else`     | Fallback branch of a condition chain       | Renders its children when no preceding `If` / `ElseIf` matched. `else`-branch.                   |
+| `Loop`     | Iterate over an array or a range           | Repeatedly renders its children once per item in `over`, or per value in `from..to` with `step`. `key` is managed per item. |
+| `Template` | Declare the render-body of a `Loop`        | Render-function child of `Loop`; receives `{ data, index }` for the current iteration.           |
+
+### Higher-order components
+
+| API       | Use case                                                | Description                                                                                     |
+| --------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `withLoop` | Reuse a presentational component as a `Loop` child      | Injects `data` and `index` props into a wrapped component so it can be used directly inside a `Loop` without a `Template` callback. See [Loops: `withLoop`](#higher-order-component-withloop). |
+
+### Runtime & configuration
+
+| API         | Use case                          | Description                                                                                |
+| ----------- | --------------------------------- | ------------------------------------------------------------------------------------------ |
+| `configure` | Turn on error reporting at runtime | Applies `ErrorReportingOptions` once, at module scope, before first render. See [Runtime configuration with `configure()`](#runtime-configuration-with-configure). |
+
+### Types
+
+| API                   | Use case                                        | Description                                                                      |
+| --------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------- |
+| `DataShape`           | Type bound for loop items                       | Available data item types (`undefined | null | string | number | boolean | object | array | T`). |
+| `IteratorProps<T, P>` | Props of the render-body of a `Loop`            | `{ data?: T; index?: number }` merged with `P` — the shape received by a `withLoop`-wrapped component. |
+| `IteratorDataShape<T>`| Data passed to the render-function              | Typed `{ data: T; index: number }` passed to `Template` render-functions.         |
+| `LoopProps<T>`        | Props accepted by `Loop`                        | `{ over?: T[]; from?: number; to?: number; step?: number; children?: ReactNode }`. |
+| `TemplateProps<T>`    | Props accepted by `Template`                    | `Partial<IteratorDataShape<T>> & { children: LoopRenderFunction<T> }`.            |
+| `ErrorReportingOptions` | Configure error reporting                     | Options accepted by `configure()` — see [Runtime configuration](#runtime-configuration-with-configure). |
 
 ## Error reporting (opt-in)
 

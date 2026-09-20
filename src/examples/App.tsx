@@ -11,6 +11,7 @@ import Example5 from './example5';
 import Example6 from './example6';
 import Example7 from './example7';
 import Example8 from './example8';
+import Example9 from './example9';
 
 import example1Source from './example1.tsx?raw';
 import example2Source from './example2.tsx?raw';
@@ -20,6 +21,7 @@ import example5Source from './example5.tsx?raw';
 import example6Source from './example6.tsx?raw';
 import example7Source from './example7.tsx?raw';
 import example8Source from './example8.tsx?raw';
+import example9Source from './example9.tsx?raw';
 
 type ExampleEntry = {
   id: number;
@@ -34,9 +36,10 @@ const examples: ExampleEntry[] = [
   { id: 3, label: 'Numeric range (odd numbers)', component: Example3, source: example3Source },
   { id: 4, label: 'Descending countdown', component: Example4, source: example4Source },
   { id: 5, label: 'If / ElseIf / Else (score)', component: Example5, source: example5Source },
-  { id: 6, label: 'Nested: Loop + Check (user roles)', component: Example6, source: example6Source },
+  { id: 6, label: 'Loop with nested inline component', component: Example6, source: example6Source },
   { id: 7, label: 'Depth-3: Loop → Loop → Check (org tree)', component: Example7, source: example7Source },
   { id: 8, label: 'In-place errors (Loop + Check)', component: Example8, source: example8Source },
+  { id: 9, label: 'Simple Loop declarative syntax', component: Example9, source: example9Source },
 ];
 
 function App() {
@@ -75,7 +78,7 @@ function App() {
       </header>
 
       <div className="flex flex-1 overflow-hidden">
-        <aside className="w-72 overflow-y-auto border-r border-slate-200 bg-white p-4">
+        <aside className="w-90 overflow-y-auto border-r border-slate-200 bg-white p-4">
           <h2 className="mb-3 px-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Examples</h2>
           <nav className="space-y-1">
             {examples.map(({ id, label }) => (

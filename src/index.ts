@@ -1,4 +1,11 @@
-export { Check, Else, ElseIf, If, Loop, Template } from '@directives';
+export { Check, Else, ElseIf, If, Loop, Template, withLoop } from '@directives';
 export { configure } from '@utils';
 
-export type { ErrorReportingOptions } from '@types';
+export type {
+  DataShape,
+  ErrorReportingOptions,
+  IteratorDataShape,
+  IteratorProps,
+  LoopProps,
+  TemplateProps,
+} from '@types';

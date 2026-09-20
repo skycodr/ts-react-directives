@@ -13,6 +13,12 @@ import { ConfigManager } from '@utils';
 import { createElement, FunctionComponent, isValidElement, NamedExoticComponent, ReactElement } from 'react';
 
 /**
+ * Maximum number of iterations a Loop may produce before it is flagged as an error. Guards against
+ * accidentally huge finite ranges (e.g. from 0 to 10_000_000) that would freeze the browser tab.
+ */
+export const MAX_LOOP_ITERATIONS = 100_000;
+
+/**
  * Create error components for the given errors if showErrors and showErrorsInPlace are true.
  *
  *
@@ -165,9 +171,24 @@ export const getComputedProps = <T extends DataShape>({ over, from, to, step }: 
     }
   }
 
-  // Bound checks for from and to against the array length
-  if (_over && (_from! < 0 || _from! > _over!.length || _to! < 0 || _to! > _over!.length)) {
-    _errors = [LogicErrors.MalformedLoop, LogicErrors.MalformedLoopParams, LogicErrors.MalformedLoopBounds];
+  // Bound checks for from and to against the array length. A `to` that equals the array length is
+  // treated as the exclusive end and clamped to the last valid index, so the inclusive iteration
+  // in useLoop never reads past the end of the array.
+  if (_over) {
+    if (_to === _over.length) _to = lastIndex;
+
+    if (_from! < 0 || _from! > _over!.length || _to! < 0 || _to! > _over!.length) {
+      _errors = [LogicErrors.MalformedLoop, LogicErrors.MalformedLoopParams, LogicErrors.MalformedLoopBounds];
+    }
+  }
+
+  // Guard against absurdly large finite ranges that would freeze the tab. Infinite direction is
+  // already caught above; this stops ranges that are technically finite but impractical to render.
+  if (!_errors.length && _from !== null && _to !== null && _step !== null) {
+    const iterations = Math.floor(Math.abs(_to - _from) / Math.abs(_step)) + 1;
+    if (iterations > MAX_LOOP_ITERATIONS) {
+      _errors = [LogicErrors.MaxLoopIterationsExceeded];
+    }
   }
 
   if (_errors.length) {

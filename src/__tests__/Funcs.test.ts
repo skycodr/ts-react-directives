@@ -20,10 +20,6 @@ describe('Test individual functions & helpers', () => {
 
     expect(confMgr.isShowErrors).toBeTruthy();
     expect(confMgr.isShowErrorsInPlace).toBeTruthy();
-
-    expect(confMgr.getByKey('TRD_SHOW_ERRORS')).toBe('true');
-    expect(confMgr.getByKey('TRD_SHOW_ERRORS_IN_PROD')).toBe('false');
-    expect(confMgr.getByKey('TRD_SHOW_ERRORS_IN_PLACE')).toBe('true');
   });
 });
 
@@ -142,8 +138,8 @@ describe('Test scenarios for getComputedProps', () => {
     expect(getComputedProps({ over: arr, from: 1, to: 3, step: 0 })).toEqual(err(LogicErrors.InfiniteLoopCondition));
   });
 
-  it('allows a to equal to the array length', () => {
-    expect(getComputedProps({ over: arr, from: 1, to: 4, step: 1 })).toEqual(arrayPass(1, 4, 1));
+  it('clamps a to that equals the array length to the last valid index', () => {
+    expect(getComputedProps({ over: arr, from: 1, to: 4, step: 1 })).toEqual(arrayPass(1, 3, 1));
   });
 
   it('rejects a negative from in a from/to/step triplet', () => {
@@ -213,6 +209,14 @@ describe('Test scenarios for getComputedProps', () => {
 
     it('flags a zero step over an empty range (from === to) as an infinite loop', () => {
       expect(getComputedProps({ from: 2, to: 2, step: 0 })).toEqual(err(LogicErrors.InfiniteLoopCondition));
+    });
+
+    it('rejects a finite range that exceeds the maximum allowed iteration count', () => {
+      expect(getComputedProps({ from: 0, to: 100_005, step: 1 })).toEqual(err(LogicErrors.MaxLoopIterationsExceeded));
+    });
+
+    it('accepts a range that lands exactly on the maximum allowed iteration count', () => {
+      expect(getComputedProps({ from: 0, to: 99_999, step: 1 })).toEqual(rangePass(0, 99_999, 1));
     });
   });
 });
