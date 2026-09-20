@@ -20,7 +20,7 @@ const Example8 = () => {
 
       <div className="mt-4 space-y-4">
         {/* Loop error: out-of-bounds slice of the array */}
-        <Loop<number> over={[1, 2, 3]} from={0} to={5}>
+        <Loop over={[1, 2, 3]} from={0} to={5}>
           {({ data }) => (
             <span className="mr-2 inline-flex h-8 w-8 items-center justify-center rounded-md border border-gray-200 bg-white shadow-sm">
               {data}

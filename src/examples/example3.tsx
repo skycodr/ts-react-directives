@@ -2,14 +2,31 @@ import { Check, Else, ElseIf, If } from '@directives';
 import { FC, useState } from 'react';
 import { Slider } from './HelperComponents';
 
+type ColorNames = 'red' | 'amber' | 'blue' | 'green' | 'fuchsia';
+type ColorTheme = {
+  textColor: string;
+  bgColor: string;
+};
+type ColorDict = {
+  [C in ColorNames]: ColorTheme;
+};
+const colors: ColorDict = {
+  red: { textColor: 'text-red-800', bgColor: 'bg-red-100' },
+  amber: { textColor: 'text-amber-800', bgColor: 'bg-amber-100' },
+  blue: { textColor: 'text-blue-800', bgColor: 'bg-blue-100' },
+  green: { textColor: 'text-green-800', bgColor: 'bg-green-100' },
+  fuchsia: { textColor: 'text-fuchsia-100', bgColor: 'bg-fuchsia-800' },
+};
+
 const ticks = [0, 35, 60, 80, 95, 100];
 
 type GradeProps = {
   value: string;
-  color: string;
+  color: ColorNames;
 };
 const Grade: FC<GradeProps> = ({ value, color }) => {
-  return <span className={`px-3 py-2 rounded-md font-medium bg-${color}-100 text-${color}-800`}>{value}</span>;
+  const { textColor, bgColor } = colors[color];
+  return <span className={`px-3 py-2 rounded-md font-medium ${bgColor} ${textColor}`}>{value}</span>;
 };
 /**
  * Example 3: Tick slider — slide between grades and see the band per position.
@@ -41,7 +58,7 @@ const Example3 = () => {
             <Grade value="B" color="green" />
           </ElseIf>
           <Else>
-            <Grade value="A" color="emerald" />
+            <Grade value="A" color="fuchsia" />
           </Else>
         </Check>
       </div>

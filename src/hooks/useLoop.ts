@@ -7,7 +7,7 @@
 
 import { Directives } from '@fixtures';
 import { useValidationFactory } from '@hooks';
-import { DataShape, LoopComputedShape, LoopProps, LoopRenderElement, LoopRenderFunction } from '@types';
+import { DataShape, LoopProps, LoopRenderElement, LoopRenderFunction } from '@types';
 import { getComputedProps, getErrors } from '@utils';
 import { cloneElement, createElement, Fragment, ReactNode, useId } from 'react';
 
@@ -20,7 +20,7 @@ export const useLoop = <T extends DataShape, P extends {} = {}>(props: LoopProps
 
   const ch = [];
 
-  const errors = useValidationFactory<LoopComputedShape<T>>(
+  const errors = useValidationFactory<LoopProps<T>>(
     {
       over,
       from,
