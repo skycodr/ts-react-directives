@@ -11,7 +11,7 @@
 ## Features
 
 - **`Check` / `If` / `ElseIf` / `Else`** — _`JSX`_ tags for conditional branching.
-- **`Loop` / `Template`** — tags for iterative logic.
+- **`Loop`** — tags for iterative logic.
 - **TypeScript** — fully supported.
 - **Nestable logic** — tags can be nested logically.
 - **Validation** — dead-lock, crash-detection and ordinal validation.
@@ -40,7 +40,6 @@ For features and how-to get started [Refer to the developer guide](./DEVELOPER.m
 
 ## Todo
 
-- Add direct declarative children to Loop/Templates.
 - Add breakOn and continueOn capability
 - Add filters
 - Exhaustive unit tests for loops
