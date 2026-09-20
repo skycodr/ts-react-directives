@@ -17,7 +17,7 @@ export default defineConfig({
       // pointing to the tsconfig.json doesn't work as it doesn't have the paths and
       // will not load the configurations correctly.
       tsconfigPath: './tsconfig.json',
-      bundleTypes: true,
+      bundleTypes: false,
     }),
     tailwindcss(),
   ],
