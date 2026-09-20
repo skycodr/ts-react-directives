@@ -7,11 +7,11 @@
 
 import { Directives } from '@fixtures';
 import { useValidationFactory } from '@hooks';
-import { DataShape, LoopComputedShape, LoopProps } from '@types';
+import { DataShape, LoopComputedShape, LoopProps, LoopRenderElement, LoopRenderFunction } from '@types';
 import { getComputedProps, getErrors } from '@utils';
-import { cloneElement, useId } from 'react';
+import { cloneElement, createElement, Fragment, ReactNode, useId } from 'react';
 
-export const useLoop = <T extends DataShape>(props: LoopProps<T>) => {
+export const useLoop = <T extends DataShape, P extends {} = {}>(props: LoopProps<T>) => {
   const id = useId();
 
   const { over, from, to, step, errors: propErrors } = getComputedProps(props);
@@ -26,7 +26,7 @@ export const useLoop = <T extends DataShape>(props: LoopProps<T>) => {
       from,
       to,
       step,
-      children,
+      children: children as ReactNode,
       errors: propErrors,
     },
     Directives.Loop,
@@ -34,17 +34,25 @@ export const useLoop = <T extends DataShape>(props: LoopProps<T>) => {
 
   if (errors.length) return getErrors(errors);
 
-  // calculate if 'i' should be greater than or equal to 'to' or less than or equal to 'to'
-  // depending on 'from', 'to' and step
+  const renderFn: LoopRenderFunction<T> | undefined =
+    typeof children === 'function' ? (children as LoopRenderFunction<T>) : undefined;
+
+  // calculate if 'i' should be greater than or equal to 'to' or less than or equal to 'to' depending on
+  // 'from', 'to' and step
 
   for (let i = from; step! > 0 ? i! <= to! : i! >= to!; i! += step!) {
-    ch.push(
-      cloneElement<{ data: T | number; index: number }>(children as any, {
-        key: `${id}-${i}`,
-        data: over?.[i!] ?? i!,
-        index: i!,
-      }),
-    );
+    const key = `${id}-${i}`;
+    const data: T = (over?.[i!] ?? i!) as unknown as T;
+    const index: number = i!;
+
+    if (renderFn) {
+      ch.push(createElement(Fragment, { key, children: renderFn({ data, index }) }));
+    } else {
+      ch.push(
+        // @ts-expect-error props may be present
+        cloneElement<LoopRenderElement<T, P>>(children as any, { key, data, index, ...((children.props ?? {}) as P) }),
+      );
+    }
   }
 
   return ch;

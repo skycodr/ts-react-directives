@@ -18,8 +18,6 @@ export const ERRORS: Record<LogicErrors, string> = {
   [LogicErrors.MalformedLoop]: 'Malformed loop',
   [LogicErrors.EmptyLoopSource]: 'Empty loop source',
   [LogicErrors.InfiniteLoopCondition]: 'Infinite loop condition',
-  [LogicErrors.TemplateBlockExpected]: "Missing 'Template'",
-  [LogicErrors.OnlyOneTemplateBlockExpected]: 'Only one Template block expected',
   [LogicErrors.SingleChildExpected]: 'Can have only a single child',
   [LogicErrors.MalformedLoopBounds]: 'Malformed loop bounds',
   [LogicErrors.MalformedLoopParams]: 'Malformed loop params',

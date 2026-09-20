@@ -16,7 +16,7 @@ import { PropsWithChildren, useMemo } from 'react';
  * use and may change or be removed in future versions.
  *
  * @param props Props to be validated.
- * @param type Component type Check, If, ElseIf, Else, Loop, Template
+ * @param type Component type Check, If, ElseIf, Else, Loop
  *
  * @returns Returns a validator function.
  */

@@ -1,5 +1,5 @@
 import { LogicErrors } from '@fixtures';
-import { ComponentType, PropsWithChildren, ReactNode, ReactElement } from 'react';
+import { ComponentType, PropsWithChildren, ReactElement, ReactNode } from 'react';
 
 type Nullable<T> = {
   [P in keyof T]: T[P] | null;
@@ -43,21 +43,20 @@ export type LoopComputedShape<T> = {
   errors: LogicErrors[];
 } & Nullable<LoopDataShape<T>>;
 
-export type LoopProps<T extends DataShape> = PropsWithChildren<LoopDataShape<T>>;
-
 export type IteratorDataShape<T extends DataShape> = {
   data: T;
   index: number;
 };
+export type IteratorProps<T = {}, P = {}> = P & Partial<IteratorDataShape<T>>;
 
-export type LoopRenderFunction<T extends DataShape> = (data: IteratorDataShape<T>) => ReactNode;
-export type LoopRenderElement<T extends DataShape> = ReactElement<Partial<ComponentType<T>>>;
+export type LoopRenderFunction<T extends DataShape> = (data: IteratorProps<T>) => ReactNode;
+export type LoopRenderElement<T extends DataShape, P extends {} = any> = ReactElement<
+  Partial<ComponentType<IteratorProps<T, P>>>
+>;
 
-export type TemplateProps<T extends DataShape> = Partial<IteratorDataShape<T>> & {
-  children: LoopRenderFunction<T> | LoopRenderElement<T>;
-};
-
-export type ValidationProps = IfProps | ElseIfProps | ElseProps | LoopProps<DataShape>;
+export type ValidationProps<T extends DataShape = any> = IfProps | ElseIfProps | ElseProps | LoopProps<DataShape<T>>;
 export type ValidatorFn<T extends ValidationProps> = (props: T) => LogicErrors[];
 
-export type IteratorProps<D, P = {}> = P & Partial<IteratorDataShape<D>>;
+export type LoopProps<T extends DataShape> = LoopDataShape<T> & {
+  children?: LoopRenderFunction<T> | LoopRenderElement<T> | ReactNode;
+};

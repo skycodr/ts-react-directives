@@ -24,8 +24,6 @@ export enum LogicErrors {
   MalformedLoopParams = 2002,
   MalformedLoop = 2008,
   InfiniteLoopCondition = 2009,
-  TemplateBlockExpected = 2012,
-  OnlyOneTemplateBlockExpected = 2013,
   EmptyLoopSource = 2014,
   MaxLoopIterationsExceeded = 2015,
 }
@@ -36,6 +34,5 @@ export enum Directives {
   Else = 'Else',
   Check = 'Check',
   Loop = 'Loop',
-  Template = 'Template',
   Unknown = 'Unknown',
 }

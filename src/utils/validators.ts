@@ -161,25 +161,18 @@ const validateCheckInvalidElement = (elementName: string, errors: LogicErrors[])
 const validateLoop: ValidatorFn<LoopProps<LoopComputedShape<DataShape>>> = (props) => {
   const errors: LogicErrors[] = [];
 
-  const data = props as LoopComputedShape<DataShape>;
-  const { errors: propErrors } = data;
+  const { errors: propErrors } = props as unknown as LoopComputedShape<DataShape>;
   errors.push(...propErrors);
 
-  const children = Children.toArray(props.children);
+  const ch = props.children;
+  const isRenderFn = typeof ch === 'function';
+  const isRenderEl = Children.count(ch) === 1;
+  const hasCh = isRenderFn || isRenderEl;
 
-  // Validating structure
-
-  if (children.length === 0) {
-    errors.push(LogicErrors.ChildrenExpected, LogicErrors.TemplateBlockExpected);
-  } else if (children.length > 1) {
-    errors.push(LogicErrors.SingleChildExpected, LogicErrors.OnlyOneTemplateBlockExpected);
-  } else {
-    // @ts-expect-error child.type exist
-    const { displayName = Directives.Unknown } = children[0].type;
-
-    if (displayName !== Directives.Template) {
-      errors.push(LogicErrors.InvalidElement, LogicErrors.TemplateBlockExpected);
-    }
+  if (!hasCh) {
+    errors.push(LogicErrors.ChildrenExpected);
+  } else if (isRenderEl && Children.count(ch) > 1) {
+    errors.push(LogicErrors.SingleChildExpected);
   }
 
   return errors;
