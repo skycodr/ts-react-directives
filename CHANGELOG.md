@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.2.0](https://github.com/skycodr/ts-react-directives/compare/v2.1.2...v2.2.0) (2026-09-20)
+
+### Features
+
+* add hoc for loops ([449fbfc](https://github.com/skycodr/ts-react-directives/commit/449fbfc2a3e873eda4b7cf25015eff93904f564d))
+
+### Bug Fixes
+
+* base-directory of examples ([8aaf57e](https://github.com/skycodr/ts-react-directives/commit/8aaf57eca4c27cf5961afe3b067e64babb757d2a))
+* change deploy trigger to manual (workflow_dispatch) and remove force_orphan ([a75593a](https://github.com/skycodr/ts-react-directives/commit/a75593abb7875a3887d89b73659a0dcd6f8518b4))
+* dev build doesn't load env vars ([df034c0](https://github.com/skycodr/ts-react-directives/commit/df034c0097f8fc650074285e267f0e0c2ec76f39))
+* forcing gh-pages as hash is the same everytime ([209d141](https://github.com/skycodr/ts-react-directives/commit/209d141324383fdb9a695e2efa8af971218801e2))
+
+### Chore
+
+* adding gh-page action ([78f9e9e](https://github.com/skycodr/ts-react-directives/commit/78f9e9e99f58ca4bf85e2e9ec428d85e42f2d10f))
+
+### Documentation
+
+* refactor documentation ([1d4fe3e](https://github.com/skycodr/ts-react-directives/commit/1d4fe3ee9935515ac7b2e42cf40ed457af750fa2))
+* **todo:** next feature setups pdated ([be16ba9](https://github.com/skycodr/ts-react-directives/commit/be16ba92a99ec82360a681374d18ae944bf3a890))
 ## [2.1.2](https://github.com/skycodr/ts-react-directives/compare/v2.1.1...v2.1.2) (2026-09-15)
 
 ### Bug Fixes
