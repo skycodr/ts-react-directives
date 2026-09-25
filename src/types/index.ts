@@ -6,20 +6,14 @@ type Nullable<T> = {
   [P in keyof T]: T[P] | null;
 };
 
+export type EnvironmentModes = 'development' | 'production' | 'test';
+
 /** Runtime configuration for error reporting and environment behavior. */
 export type EnvConfigs = {
-  mode: 'development' | 'production' | 'test';
+  mode: EnvironmentModes;
   showErrors: boolean;
   showErrorsInProd: boolean;
   showErrorsInPlace: boolean;
-};
-
-/** Optional overrides for the error-reporting configuration. */
-export type ErrorReportingOptions = {
-  mode?: EnvConfigs['mode'];
-  showErrors?: boolean;
-  showErrorsInProd?: boolean;
-  showErrorsInPlace?: boolean;
 };
 
 /** Values supported by directive data and loop collections. */

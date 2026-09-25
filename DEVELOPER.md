@@ -214,19 +214,19 @@ import { Check, Else, ElseIf, If, Loop, configure } from '@openbytes/ts-react-di
 
 ### Runtime & configuration
 
-| API         | Use case                           | Description                                                                                                                                                        |
-| ----------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `configure` | Turn on error reporting at runtime | Applies `ErrorReportingOptions` once, at module scope, before first render. See [Runtime configuration with `configure()`](#runtime-configuration-with-configure). |
+| API         | Use case                           | Description                                                                                                                                             |
+| ----------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `configure` | Turn on error reporting at runtime | Applies `EnvConfigs` once, at module scope, before first render. See [Runtime configuration with `configure()`](#runtime-configuration-with-configure). |
 
 ### Types
 
-| API                     | Use case                             | Description                                                                                             |
-| ----------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| `DataShape`             | Type bound for loop items            | Available data item types (`undefined                                                                   |
-| `IteratorProps<T, P>`   | Props of the render-body of a `Loop` | `{ data?: T; index?: number }`                                                                          |
-| `IteratorDataShape<T>`  | Data passed to the render-function   | Typed `{ data: T; index: number }` passed to the render-functions.                                      |
-| `LoopProps<T>`          | Props accepted by `Loop`             | `{ over?: T[]; from?: number; to?: number; step?: number; children?: ReactNode }`.                      |
-| `ErrorReportingOptions` | Configure error reporting            | Options accepted by `configure()` — see [Runtime configuration](#runtime-configuration-with-configure). |
+| API                    | Use case                             | Description                                                                                             |
+| ---------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| `DataShape`            | Type bound for loop items            | Available data item types (`undefined                                                                   |
+| `IteratorProps<T, P>`  | Props of the render-body of a `Loop` | `{ data?: T; index?: number }`                                                                          |
+| `IteratorDataShape<T>` | Data passed to the render-function   | Typed `{ data: T; index: number }` passed to the render-functions.                                      |
+| `LoopProps<T>`         | Props accepted by `Loop`             | `{ over?: T[]; from?: number; to?: number; step?: number; children?: ReactNode }`.                      |
+| `EnvConfigs`           | Configure error reporting            | Options accepted by `configure()` — see [Runtime configuration](#runtime-configuration-with-configure). |
 
 ## Error reporting (opt-in)
 
@@ -253,7 +253,7 @@ configure({
 });
 ```
 
-The available options (`ErrorReportingOptions`):
+The available options (`EnvConfigs`):
 
 | Option              | Type                                      | Default      | Description                                                     |
 | ------------------- | ----------------------------------------- | ------------ | --------------------------------------------------------------- |
@@ -385,7 +385,7 @@ picks yours.
 │   ├── components/           # Errors.tsx — styled error list with trd-* hooks
 │   ├── hooks/                # hooks for the directives
 │   ├── utils/                # ConfigManager + configure() runtime API
-│   ├── types/                # shared public types (ErrorReportingOptions, ...)
+│   ├── types/                # shared public types (EnvConfigs, ...)
 │   ├── fixtures/             # error messages and logic validation
 │   ├── assets/               # index.css (Tailwind entry point)
 │   ├── examples/             # demo project: App.tsx switcher + example1..8

@@ -5,7 +5,7 @@
  * No build-time env values are baked into the published package - consumers can always override.
  */
 
-import { EnvConfigs, ErrorReportingOptions } from '@types';
+import { EnvConfigs } from '@types';
 
 /**
  * Singleton class to manage runtime configurations. Values set through `configure()` always win over
@@ -14,7 +14,7 @@ import { EnvConfigs, ErrorReportingOptions } from '@types';
 export class ConfigManager {
   private static __instance: ConfigManager;
   private config: EnvConfigs | undefined = undefined;
-  private overrides: Partial<ErrorReportingOptions> = {};
+  private overrides: Partial<EnvConfigs> = {};
 
   private constructor() {}
 
@@ -33,7 +33,7 @@ export class ConfigManager {
    *
    * @param options Partial configuration to apply on top of any existing settings.
    */
-  public configure(options: ErrorReportingOptions): void {
+  public configure(options: Partial<EnvConfigs>): void {
     this.overrides = { ...this.overrides, ...options };
     this.config = undefined;
   }
@@ -129,4 +129,4 @@ export class ConfigManager {
  *
  * @param options Partial configuration to apply.
  */
-export const configure = (options: ErrorReportingOptions): void => ConfigManager.getInstance().configure(options);
+export const configure = (options: Partial<EnvConfigs>): void => ConfigManager.getInstance().configure(options);
