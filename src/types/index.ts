@@ -48,24 +48,30 @@ export type LoopComputedShape<T> = {
 } & Nullable<LoopDataShape<T>>;
 
 /** A loop item and its zero-based position. */
-export type IteratorDataShape<T extends DataShape> = {
+export type IteratorParams<T extends DataShape> = {
   data: T;
   index: number;
 };
 /** Props supplied to an iterator, including optional item and index values. */
-export type IteratorProps<T = {}, P = {}> = P & Partial<IteratorDataShape<T>>;
+export type IteratorProps<T = {}, P = {}> = Partial<P & IteratorParams<T>>;
 
 /** Render function used to produce content for each loop item. */
 export type LoopRenderFunction<T extends DataShape> = (data: IteratorProps<T>) => ReactNode;
+
 /** React element component type used to render each loop item. */
 export type LoopRenderElement<T extends DataShape, P extends {} = any> = ReactElement<
-  Partial<ComponentType<IteratorProps<T, P>>>
+  ComponentType<IteratorProps<T, P>>
 >;
+
+/** Function definition for breakOn or continueOn */
+export type LoopControlFn<T extends DataShape> = (data: IteratorParams<T>) => boolean;
 
 /** Configures a loop and optionally provides content for each iteration. */
 export type LoopProps<T extends DataShape> = Partial<
   LoopComputedShape<T> & {
-    children?: LoopRenderFunction<T> | LoopRenderElement<T> | ReactNode;
+    breakOn: LoopControlFn<T>;
+    continueOn: LoopControlFn<T>;
+    children: LoopRenderFunction<T> | LoopRenderElement<T> | ReactNode;
   }
 >;
 

@@ -16,7 +16,7 @@ export const useLoop = <T extends DataShape, P extends {} = {}>(props: LoopProps
 
   const { over, from, to, step, errors: propErrors } = getComputedProps(props);
 
-  const { children } = props;
+  const { children, breakOn, continueOn } = props;
 
   const ch = [];
 
@@ -26,6 +26,8 @@ export const useLoop = <T extends DataShape, P extends {} = {}>(props: LoopProps
       from,
       to,
       step,
+      breakOn,
+      continueOn,
       children: children as ReactNode,
       errors: propErrors,
     },
@@ -44,6 +46,13 @@ export const useLoop = <T extends DataShape, P extends {} = {}>(props: LoopProps
     const key = `${id}-${i}`;
     const data: T = (over?.[i!] ?? i!) as unknown as T;
     const index: number = i!;
+
+    // check for undefined
+    // eslint-disable-next-line no-extra-boolean-cast
+    if (!!breakOn?.({ data, index })) break;
+
+    // eslint-disable-next-line no-extra-boolean-cast
+    if (!!continueOn?.({ data, index })) continue;
 
     if (renderFn) {
       ch.push(createElement(Fragment, { key, children: renderFn({ data, index }) }));
