@@ -1,12 +1,12 @@
-import { ChangeEventHandler, FC } from 'react';
+import { ChangeEventHandler, FC, PropsWithChildren } from 'react';
 
-type ToggleType = {
+type ToggleProps = {
   label: string;
   checked: boolean;
   handler: ChangeEventHandler;
 };
 
-export const Toggle: FC<ToggleType> = ({ label, checked, handler }) => {
+export const Toggle: FC<ToggleProps> = ({ label, checked, handler }) => {
   return (
     <label className="inline-flex cursor-pointer items-center gap-3 select-none">
       <span className="text-sm font-medium text-gray-700">{label}</span>
@@ -26,7 +26,7 @@ export const Toggle: FC<ToggleType> = ({ label, checked, handler }) => {
   );
 };
 
-type SliderType = {
+type SliderProps = {
   label: string;
   min: number;
   max: number;
@@ -38,7 +38,7 @@ type SliderType = {
 const snapToTick = (value: number, ticks: number[]) =>
   ticks.reduce((closest, tick) => (Math.abs(tick - value) < Math.abs(closest - value) ? tick : closest));
 
-export const Slider: FC<SliderType> = ({ label, min, max, ticks, value, onChange }) => {
+export const Slider: FC<SliderProps> = ({ label, min, max, ticks, value, onChange }) => {
   const range = max - min;
   const percent = (tick: number) => ((tick - min) / range) * 100;
 
@@ -79,5 +79,26 @@ export const Slider: FC<SliderType> = ({ label, min, max, ticks, value, onChange
         ))}
       </div>
     </div>
+  );
+};
+
+export const Title: FC<PropsWithChildren> = ({ children }) => <h2 className="text-xl font-semibold">{children}</h2>;
+export const Description: FC<PropsWithChildren> = ({ children }) => (
+  <p className="mt-1 text-sm text-gray-500 italic">{children}</p>
+);
+export const Controls: FC<PropsWithChildren> = ({ children }) => (
+  <p className="my-3 pt-3 pb-3 text-sm text-gray-600">{children}</p>
+);
+
+type RenderExampleProps = PropsWithChildren<{
+  title: string;
+}>;
+
+export const RenderExample: FC<RenderExampleProps> = ({ title, children }) => {
+  return (
+    <section>
+      <Title>{title}</Title>
+      {children}
+    </section>
   );
 };

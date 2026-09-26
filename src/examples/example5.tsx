@@ -1,12 +1,10 @@
 import { Loop } from '@directives';
+import { Description, RenderExample } from './HelperComponents';
 
-/**
- * Example 5: Loop over a numeric range (from -> to) with a custom step.
- */
 const Example5 = () => {
   return (
-    <section>
-      <h2 className="text-xl font-semibold mb-3">Example 5: Odd numbers with inline component</h2>
+    <RenderExample title="Example 5: Odd numbers with inline component">
+      <Description>Rendering from 1 - 9 while step = 2 (custom step), using inline render function.</Description>
       <div className="flex flex-wrap gap-2">
         <Loop<number> from={1} to={9} step={2}>
           {({ data }) => (
@@ -16,7 +14,7 @@ const Example5 = () => {
           )}
         </Loop>
       </div>
-    </section>
+    </RenderExample>
   );
 };
 

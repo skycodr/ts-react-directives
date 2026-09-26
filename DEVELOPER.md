@@ -220,13 +220,13 @@ import { Check, Else, ElseIf, If, Loop, configure } from '@openbytes/ts-react-di
 
 ### Types
 
-| API                    | Use case                             | Description                                                                                             |
-| ---------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| `DataShape`            | Type bound for loop items            | Available data item types (`undefined                                                                   |
-| `IteratorProps<T, P>`  | Props of the render-body of a `Loop` | `{ data?: T; index?: number }`                                                                          |
-| `IteratorDataShape<T>` | Data passed to the render-function   | Typed `{ data: T; index: number }` passed to the render-functions.                                      |
-| `LoopProps<T>`         | Props accepted by `Loop`             | `{ over?: T[]; from?: number; to?: number; step?: number; children?: ReactNode }`.                      |
-| `EnvConfigs`           | Configure error reporting            | Options accepted by `configure()` — see [Runtime configuration](#runtime-configuration-with-configure). |
+| API                   | Use case                             | Description                                                                                             |
+| --------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| `DataShape`           | Type bound for loop items            | Available data item types (`undefined                                                                   |
+| `IteratorProps<T, P>` | Props of the render-body of a `Loop` | `{ data?: T; index?: number }`                                                                          |
+| `IteratorParams<T>`   | Data passed to the render-function   | Typed `{ data: T; index: number }` passed to the render-functions.                                      |
+| `LoopProps<T>`        | Props accepted by `Loop`             | `{ over?: T[]; from?: number; to?: number; step?: number; children?: ReactNode }`.                      |
+| `EnvConfigs`          | Configure error reporting            | Options accepted by `configure()` — see [Runtime configuration](#runtime-configuration-with-configure). |
 
 ## Error reporting (opt-in)
 

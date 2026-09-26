@@ -1,50 +1,47 @@
 import '@assets/index.css';
-import { useMemo, useState } from 'react';
+import { ComponentType, lazy, Suspense, useEffect, useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
-
-import Example1 from './example1';
-import Example2 from './example2';
-import Example3 from './example3';
-import Example4 from './example4';
-import Example5 from './example5';
-import Example6 from './example6';
-import Example7 from './example7';
-import Example8 from './example8';
-import Example9 from './example9';
-
-import example1Source from './example1.tsx?raw';
-import example2Source from './example2.tsx?raw';
-import example3Source from './example3.tsx?raw';
-import example4Source from './example4.tsx?raw';
-import example5Source from './example5.tsx?raw';
-import example6Source from './example6.tsx?raw';
-import example7Source from './example7.tsx?raw';
-import example8Source from './example8.tsx?raw';
-import example9Source from './example9.tsx?raw';
 
 type ExampleEntry = {
   id: number;
   label: string;
-  component: () => import('react').JSX.Element;
-  source: string;
+  component: ComponentType;
 };
 
+const loadExample = (index: number) => import(`./example${index}`);
+const loadSource = (index: number): Promise<string> =>
+  import(`./example${index}.tsx?raw`).then(({ default: source }) => source);
+
 const examples: ExampleEntry[] = [
-  { id: 1, label: 'Conditional rendering with If', component: Example1, source: example1Source },
-  { id: 2, label: 'Flip-Flop with If / Else', component: Example2, source: example2Source },
-  { id: 3, label: 'Slide for grades with If / ElseIf / Else', component: Example3, source: example3Source },
-  { id: 4, label: 'Simple declarative Loop', component: Example4, source: example4Source },
-  { id: 5, label: 'Odd numbers with (numeric range)', component: Example5, source: example5Source },
-  { id: 6, label: 'Loop with nested inline component', component: Example6, source: example6Source },
-  { id: 7, label: 'Mixed nested directives', component: Example7, source: example7Source },
-  { id: 8, label: 'In-place errors (Loop + Check)', component: Example8, source: example8Source },
-  { id: 9, label: 'Nested Loop (2D matrix)', component: Example9, source: example9Source },
+  { id: 1, label: 'What if', component: lazy(() => loadExample(1)) },
+  { id: 2, label: 'Flip-Flop', component: lazy(() => loadExample(2)) },
+  { id: 3, label: 'Rate me', component: lazy(() => loadExample(3)) },
+  { id: 4, label: 'Fruity loops', component: lazy(() => loadExample(4)) },
+  { id: 5, label: 'Oddities', component: lazy(() => loadExample(5)) },
+  { id: 6, label: 'Lift off, on mark', component: lazy(() => loadExample(6)) },
+  { id: 7, label: 'The project manager', component: lazy(() => loadExample(7)) },
+  { id: 8, label: 'Neo: The One', component: lazy(() => loadExample(8)) },
+  { id: 9, label: 'FizzBuzz', component: lazy(() => loadExample(9)) },
+  { id: 10, label: 'Sad breakup', component: lazy(() => loadExample(10)) },
+  { id: 11, label: 'Hello! world', component: lazy(() => loadExample(11)) },
+  { id: 12, label: 'In-place / replace', component: lazy(() => loadExample(12)) },
 ];
 
 function App() {
   const [selected, setSelected] = useState(1);
-  const Active = useMemo(() => examples.find(({ id }) => id === selected) ?? examples[0], [selected]);
+  const [source, setSource] = useState('');
+  const Active = examples.find(({ id }) => id === selected) ?? examples[0];
+
+  useEffect(() => {
+    let active = true;
+    loadSource(selected).then((loadedSource) => {
+      if (active) setSource(loadedSource);
+    });
+    return () => {
+      active = false;
+    };
+  }, [selected]);
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
@@ -91,9 +88,7 @@ function App() {
                   selected === id ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'
                 }`}
               >
-                <span className={`mr-2 font-mono text-xs ${selected === id ? 'text-slate-400' : 'text-slate-400'}`}>
-                  {String(id).padStart(2, '0')}
-                </span>
+                <span className="mr-2 font-mono text-xs text-slate-400">{String(id).padStart(2, '0')}</span>
                 {label}
               </button>
             ))}
@@ -107,7 +102,9 @@ function App() {
               <h2 className="text-sm font-semibold text-slate-800">Live render</h2>
             </div>
             <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-              <Active.component />
+              <Suspense fallback={<p className="text-sm text-slate-500">Loading example...</p>}>
+                <Active.component />
+              </Suspense>
             </div>
           </section>
 
@@ -142,7 +139,7 @@ function App() {
                 }}
                 codeTagProps={{ style: { fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' } }}
               >
-                {Active.source.replace('@directives', '@openbytes/ts-react-directive')}
+                {source.replace('@directives', '@openbytes/ts-react-directive')}
               </SyntaxHighlighter>
             </div>
           </section>

@@ -1,12 +1,7 @@
 import { Check, Else, If, Loop } from '@directives';
 import { IteratorProps } from '@types';
 import { FC } from 'react';
-
-interface Project {
-  name: string;
-  active: boolean;
-  members: number;
-}
+import { Description, RenderExample } from './HelperComponents';
 
 const projects: Project[] = [
   { name: 'Directives Core', active: true, members: 4 },
@@ -14,6 +9,34 @@ const projects: Project[] = [
   { name: 'Legacy CLI', active: false, members: 1 },
   { name: 'CDK Playground', active: true, members: 6 },
 ];
+
+const Example7 = () => {
+  return (
+    <RenderExample title="Example 7: Depth-3 nesting (Loop → Check → Check)">
+      <Description>
+        Nested logic Loop -&gt; Check -&gt; Check. Nesting can be performed in any order. Also, demonstrates looping
+        over descending order.
+      </Description>
+      <ul className="mt-3 space-y-2">
+        <Loop over={projects} step={-1}>
+          <Project />
+        </Loop>
+      </ul>
+    </RenderExample>
+  );
+};
+
+export default Example7;
+
+/*********************************************************************/
+/* Helper types, components and methods are added below.             */
+/*********************************************************************/
+
+type Project = {
+  name: string;
+  active: boolean;
+  members: number;
+};
 
 const Project: FC<IteratorProps<Project>> = ({ data }) => {
   const project = data!;
@@ -43,25 +66,3 @@ const Project: FC<IteratorProps<Project>> = ({ data }) => {
     </li>
   );
 };
-
-/**
- * Example 7: Three levels of nested directives.
- *
- * Level 1: `Loop` over the projects
- * Level 2: `Check` on project.active (If → active / Else → archived)
- * Level 3: nested `Check` on team size (If ≥ 3 → full team / Else → small squad)
- */
-const Example7 = () => {
-  return (
-    <section>
-      <h2 className="text-xl font-semibold">Example 7: Depth-3 nesting (Loop → Check → Check)</h2>
-      <ul className="mt-3 space-y-2">
-        <Loop over={projects}>
-          <Project />
-        </Loop>
-      </ul>
-    </section>
-  );
-};
-
-export default Example7;

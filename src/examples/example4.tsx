@@ -1,41 +1,33 @@
 import { Loop } from '@directives';
 import { IteratorProps } from '@types';
 import { FC } from 'react';
+import { Description, RenderExample } from './HelperComponents';
 
 const fruits = ['Apple', 'Banana', 'Cherry', 'Mango', 'Orange', 'Pineapple'];
 
-/**
- * LoopItem component
- *
- * @param props
- * @returns
- */
-const FruitItem: FC<IteratorProps<string>> = (props) => {
-  const { data, index } = props;
-  return (
-    <li className="px-3 py-2 bg-white border border-gray-200 rounded-md shadow-sm">
-      <span className="font-medium text-gray-700">
-        {index! + 1}. {data}
-      </span>
-    </li>
-  );
-};
-
-/**
- * Example 4: Loop over an array.
- */
-
 const Example4 = () => {
   return (
-    <section>
-      <h2 className="text-xl font-semibold">Example 4: Simple declarative Loop</h2>
+    <RenderExample title="Example 4: Simple declarative Loop">
+      <Description>Loop over an array of strings. `from`, `to`, and `step` is calculated automatically.</Description>
       <ul className="mt-3 space-y-1">
         <Loop over={fruits}>
           <FruitItem />
         </Loop>
       </ul>
-    </section>
+    </RenderExample>
   );
 };
 
 export default Example4;
+
+/*********************************************************************/
+/* Helper types, components and methods are added below.             */
+/*********************************************************************/
+
+const FruitItem: FC<IteratorProps<string>> = ({ data, index }) => (
+  <li className="px-3 py-2 bg-white border border-gray-200 rounded-md shadow-sm">
+    <span className="font-medium text-gray-700">
+      {index! + 1}. {data}
+    </span>
+  </li>
+);

@@ -1,24 +1,17 @@
 import { Check, Else, If } from '@directives';
 import { ChangeEvent, useState } from 'react';
-import { Toggle } from './HelperComponents';
+import { Controls, Description, RenderExample, Toggle } from './HelperComponents';
 
-/**
- * Example 2: Flip-Flop using If / Else — flip the toggle to show or hide the list.
- */
 const Example2 = () => {
   const [flipped, setFlipped] = useState(false);
+  const handler = (event: ChangeEvent) => setFlipped((event.currentTarget as HTMLInputElement).checked);
 
   return (
-    <section>
-      <h2 className="text-xl font-semibold">Example 2: Flip/flop with If / Else</h2>
-      <p className="mt-3 mb-3 text-sm text-gray-600">
-        <Toggle
-          label="Flip the Switch"
-          checked={flipped}
-          handler={(event: ChangeEvent) => setFlipped((event.currentTarget as HTMLInputElement).checked)}
-        />
-      </p>
-
+    <RenderExample title="Example 2: Flip/flop with If / Else">
+      <Description>Ternary rendering using If / Else — flip the toggle to show or hide the list.</Description>
+      <Controls>
+        <Toggle label="Flip the Switch" checked={flipped} handler={handler} />
+      </Controls>
       <Check>
         <If condition={flipped}>
           <p className="mt-3 text-sm text-green-500 italic">ON</p>
@@ -27,7 +20,7 @@ const Example2 = () => {
           <p className="mt-3 text-sm text-red-500 italic">OFF</p>
         </Else>
       </Check>
-    </section>
+    </RenderExample>
   );
 };
 
