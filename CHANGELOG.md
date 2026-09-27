@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.1.1](https://github.com/skycodr/ts-react-directives/compare/v3.1.0...v3.1.1) (2026-09-27)
+
+### Bug Fixes
+
+* static import issue ([38eac1b](https://github.com/skycodr/ts-react-directives/commit/38eac1b2a55e2d583bbe863865ddbcf52bee2ef4))
 ## [3.1.0](https://github.com/skycodr/ts-react-directives/compare/v3.0.0...v3.1.0) (2026-09-27)
 
 ### Features
