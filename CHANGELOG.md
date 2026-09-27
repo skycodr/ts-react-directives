@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.1.0](https://github.com/skycodr/ts-react-directives/compare/v3.0.0...v3.1.0) (2026-09-27)
+
+### Features
+
+* adding break and continue capability to loop ([eac3b37](https://github.com/skycodr/ts-react-directives/commit/eac3b37c5f9eda3dffe4b7f18541f51703b73d19))
+
+### Bug Fixes
+
+* type inferrencing inside loop ([9f32295](https://github.com/skycodr/ts-react-directives/commit/9f32295f0a385dcb9add5fe361723b5216e0ca6b))
+
+### Refactoring
+
+* examples and recepies ([c41921f](https://github.com/skycodr/ts-react-directives/commit/c41921f1e947bb52e47983f1453bb3c99816c972))
+* house cleaning ([9eac78e](https://github.com/skycodr/ts-react-directives/commit/9eac78e1d1a46017b65621d32c094e3fc6cfa460))
+* house keeping ([483fa9b](https://github.com/skycodr/ts-react-directives/commit/483fa9b61812c6176a0eb8aee1eec522cd98ffba))
+
+### Documentation
+
+* update developer.md ([6ce351e](https://github.com/skycodr/ts-react-directives/commit/6ce351e60dda7148fea39a770a95b962b6e960b4))
+
+### Tests
+
+* adding tests for break and continue ([d43083e](https://github.com/skycodr/ts-react-directives/commit/d43083ea53823d94e667f91d87cea51c08fdaa7b))
 ## [3.0.0](https://github.com/skycodr/ts-react-directives/compare/v2.3.0...v3.0.0) (2026-09-20)
 
 ### ⚠ BREAKING CHANGES
