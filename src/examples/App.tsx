@@ -9,7 +9,7 @@ type ExampleEntry = {
   component: ComponentType;
 };
 
-const loadExample = (index: number) => import(`./example${index}`);
+const loadExample = (index: number) => import(`./example${index}.tsx`);
 const loadSource = (index: number): Promise<string> =>
   import(`./example${index}.tsx?raw`).then(({ default: source }) => source);
 
